@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.flex{
+  display: flex;
+  .content{
+    width: 100%;
+    height: fit-content;
+    margin-left: auto;
+  }
+}
+
+/* @media (max-width: 848px) {
+  .flex{
+    .content{
+      margin-left: 4rem;
+    }
+  }
+} */
+
+/* .App {
+  border: 1px solid gray ;
+  animation: App-logo-spin infinite 20s linear;
+} */
+/* 
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
