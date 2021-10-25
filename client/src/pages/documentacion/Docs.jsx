@@ -3,9 +3,15 @@ import "./docs.scss";
 
 const docs = () => {
     return (
+        <>
         <div className="docs">
-            <p>Documentacion</p>
+          <div className="container">
+            <div className="docs__titulo">
+              <h2>Documentación</h2>
+            </div>
+          </div>
         </div>
+      </>
     )
 }
 

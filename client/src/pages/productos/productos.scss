@@ -1,3 +1,5 @@
+@import '../../components/Sidebar/sidebar.scss';
+
 .productos{
     background-color: whitesmoke;
     padding: 1.5rem 1rem 1rem 1rem;
@@ -6,12 +8,25 @@
     height: 900px;
     overflow: hidden;
 
-    .titulo{
-        padding: 2rem 0 ;
+    &__titulo{
+        margin-bottom: 2rem;
     }
 
     Table{
+        margin-top: 2rem;
         background-color: white;
     }
+
+    .contenedor{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        Form{
+            margin: 2rem 0;
+            width: 80%;
+        }
+    }
+
 
 }

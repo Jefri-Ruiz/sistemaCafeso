@@ -1,7 +1,14 @@
+@import '../../components/Sidebar/sidebar.scss';
+
 .docs{
-    background-color: aqua;
-    padding: 1rem;
-    border: 2px solid red;
+    background-color: whitesmoke;
+    padding: 1.5rem 1rem 1rem 1rem;
+    /* border: 2px solid red; */
     width: 100%;
-    height: 800px;
+    height: 900px;
+    overflow: hidden;
+
+    &__titulo{
+        margin-bottom: 2rem;
+    }
 }
