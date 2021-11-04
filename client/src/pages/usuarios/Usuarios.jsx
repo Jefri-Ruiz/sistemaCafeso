@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table, Tabs, Tab, Form, Button } from "react-bootstrap";
+import * as FaIcons from 'react-icons/fa'
+import EditarUsuario from '../../components/editar/EditarUsuario';
 
 import "./usuarios.scss";
 
@@ -7,6 +9,66 @@ const Usuarios = () => {
 
     const [key, setKey] = useState('Registrar');
 
+    /* agregar usuario */
+
+    const [nombre, setNombre] = useState('');
+    const [paterno, setPaterno] = useState('');
+    const [materno, setMaterno] = useState('');
+    const [pass, setPass] = useState('');
+
+    const usuario = {
+        pass,
+        nombre,
+        paterno,
+        materno
+    }
+    
+    const onSubmitForm = async(e) => {
+      e.preventDefault();
+      try {
+      const body = {usuario};
+      const respuesta =
+      await fetch("http://localhost:5000/usuarios",{
+        method:"POST",
+        headers:{"Content-type":"application/json"},
+        body: JSON.stringify(body)
+        });
+        console.log(respuesta);
+      } catch (err){
+      console.error(err.message);
+    }
+  }
+  
+  /* para listar los usuarios  */
+  const [editUsuario, setEditUsuario] = useState([]);
+
+  async function obtenerUsuario() {
+    const res = await fetch("http://localhost:5000/usuarios");
+    const usuariosArray = await res.json();
+    setEditUsuario(usuariosArray) 
+  }
+
+  useEffect(() => {
+      obtenerUsuario();
+  }, []);
+  console.log(editUsuario);
+
+
+  /* para eliminar usuario  */
+  const [eliminarUsuario, setEliminarUsuario] = useState([]);
+  async function borrarUsuario(matricula) {
+    try {
+      const res = await fetch(`http://localhost:5000/usuarios/${matricula}`,{
+        method: 'DELETE'
+      });
+      setEliminarUsuario(eliminarUsuario.filter(usuario => usuario.matricula !== matricula));
+      
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+    
     return (
         <>
         <div className="usuarios">
@@ -21,49 +83,60 @@ const Usuarios = () => {
               className="mb-2 w-100"
               style={{textDecoration:"none"}}
             >
+
               <Tab eventKey="Registrar" title="Registrar">
   
               <div className="contenedor">
-              <Form>
+              <Form onSubmit={onSubmitForm}>
                   
-                      <Form.Group className="mb-3" controlId="formNombre">
-                          <Form.Label>Nombre</Form.Label>
-                          <Form.Control type="text" placeholder="Nombre completo" />
-  
-                      </Form.Group>
-  
-                      <Form.Group className="mb-3" controlId="formNumReporte">
-                          <Form.Label>No de reporte</Form.Label>
-                          <Form.Control type="number" placeholder="No de reporte" />
-                      </Form.Group>
-  
-                      <Form.Group className="mb-3" controlId="fromAsunto">
-                          <Form.Label>Asunto</Form.Label>
+                      <Form.Group className="mb-4" controlId="formNombre">
+                          {/* <Form.Label>Nombre</Form.Label> */}
                           <Form.Control
-                                as="textarea"
-                                placeholder="Detallar información"
-                                style={{ height: '100px' }}                        
+                            autoComplete="off" 
+                            type="text"
+                            placeholder="Nombre"
+                            value={nombre}
+                            onChange={e => setNombre(e.target.value)}
                           />
-                          
                       </Form.Group>
-  
-                      <Form.Group className="mb-3" controlId="fromUrgencia">
-                      <Form.Label>Importancia</Form.Label>
-                      <Form.Select aria-label="Default select example">
-                          <option>Abrir para seleccionar</option>
-                          <option value="1">Alta</option>
-                          <option value="2">Media</option>
-                          <option value="3">Baja</option>
-                      </Form.Select>
+
+                      <Form.Group className="mb-4" controlId="formPaterno">
+                          <Form.Control
+                            autoComplete="off" 
+                            type="text"
+                            placeholder="Apellido paterno"
+                            value={paterno}
+                            onChange={e => setPaterno(e.target.value)}
+                          />
                       </Form.Group>
+
+                      <Form.Group className="mb-4" controlId="formMaterno">
+                          <Form.Control
+                            autoComplete="off" 
+                            type="text"
+                            placeholder="Apellido materno"
+                            value={materno}
+                            onChange={e => setMaterno(e.target.value)}
+                          />
+                      </Form.Group>
+
+                      <Form.Group className="mb-3" controlId="formPass">
+                          <Form.Control
+                            autoComplete="off" 
+                            type="password"
+                            placeholder="Password"
+                            value={pass}
+                            onChange={e => setPass(e.target.value)}
+                          />
+                        <Form.Text className="text-muted">
+                        Asegurese ingresar correctamente la contraseña
+                        </Form.Text>
+                      </Form.Group>
+
+                      <br />
                       
-                      <Form.Text className="text-muted">
-                          La información aqui capturada es de caracter confidencial.
-                          </Form.Text>
-                          <br />
-                          <br />
                       <Button variant="primary" type="submit">
-                          Enviar
+                          Agregar
                       </Button>
                   </Form>
                   </div>
@@ -75,35 +148,27 @@ const Usuarios = () => {
               <Table striped bordered hover>
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>Matricula</th>
+                      <th>Password</th>
                       <th>Nombre</th>
-                      <th>Numero reporte</th>
-                      <th>Asunto</th>
-                      <th>Importancia</th>
+                      <th>Apellido paterno</th>
+                      <th>Apellido materno</th>
+                      <th>Editar</th>
+                      <th>Eliminar</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Marco Cortez</td>
-                      <td>784512</td>
-                      <td>Transporte</td>
-                      <td>Media</td>
+                    { editUsuario.map( usuario =>(
+                    <tr key={usuario.matricula}>
+                      <td>{usuario.matricula}</td>
+                      <td>{usuario.password}</td>
+                      <td>{usuario.nombre}</td>
+                      <td>{usuario.apellidopaterno}</td>
+                      <td>{usuario.apellidomaterno}</td>
+                      <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100"/></Button>{/* <EditarUsuario usuario={usuario}/> */}</td>
+                      <td><Button className="btn btn-danger" /* onClick={borrarUsuario(usuario.matricula)} */><FaIcons.FaTrashAlt className="h-100 w-100"/></Button></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Jacob Perez</td>
-                      <td>326589</td>
-                      <td>Activos</td>
-                      <td>Alta</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Kate Ruiz</td>
-                      <td>785612</td>
-                      <td>Productos</td>
-                      <td>Baja</td>
-                    </tr>
+                    ))}
                   </tbody>
                 </Table>
   
