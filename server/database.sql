@@ -295,5 +295,3 @@ for each row execute procedure calculo_cTotalS();
 CREATE SEQUENCE matricula_seq;
 ALTER TABLE usuario ALTER matricula SET DEFAULT NEXTVAL('matricula_seq');
 
-
---- Todos estos querys estan verificados y son funcionales
