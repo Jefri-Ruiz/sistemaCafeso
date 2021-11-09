@@ -1,21 +1,33 @@
 import React, { useState } from 'react'
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import * as FaIcons from 'react-icons/fa'
 
-const EditarUsuario = ({usuario, nombre}) => {
-    const [editUsuario, setEditUsuario] = useState(usuario.nombre)
+const EditarUsuario = ({usuario}) => {
+    const [nombre, setNombre] = useState(usuario.nombre);
+
+    /* Para mostar la ventana modal */
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+
+    /* prueba actualizar usuario */
 
     const updateNombre = async (e) =>{
         e.preventDefault();
         try {
             const body = {nombre};
-            const respuesta = await fetch(`http://localhost:5000/usuarios/${usuario.matricula}`,
+            /* const respuesta =  */await fetch(`http://localhost:5000/usuarios/${usuario.matricula}`,
             {
                 method: "PUT",
                 headers: {"Content-type":"application/json"},
                 body: JSON.stringify(body)
             }
             );
-            window.location = "/";
+            window.location = "/usuarios";
         } catch (err) {
             console.error(err.message)
         }
@@ -24,53 +36,51 @@ const EditarUsuario = ({usuario, nombre}) => {
     return (
         <>
             <Button type="button"
-                className="btn btn-warning"
-                data-toggle="modal"
+                variant="primary"
                 data-target={`#matricula${usuario.matricula}`}
-            >Editar</Button>
-            <div className="Modal"
-                id={`id${usuario.matricula}`}
-                onClick={()=> setEditUsuario(usuario.nombre)}
-            >
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title">Editar usuario</h4>
-                            <Button type="button"
-                            className="btn btn-warning"
-                            data-dismiss="modal"
-                            onClick ={() => setEditUsuario(usuario.nombre)}
-                            >&times;</Button>
-                        </div>
+                onClick={handleShow}
+            ><FaIcons.FaEdit className="h-100 w-100"/></Button>
 
-                        <div className="modal-body">
+            <Modal className="Modal"
+                show={show} 
+                onHide={handleClose}
+                backdrope="static"
+                keyboard={false}
+                id={`matricula${usuario.matricula}`}
+                onClick={()=> setNombre(usuario.nombre)}
+            >
+
+                        <Modal.Header closeButton>
+                            <Modal.Title>Editar usuario</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
                             <input type="text"
                                 className="form-control"
                                 value={nombre}
-                                onChange={e => setEditUsuario(e.target.value) }
+                                onChange={e => setNombre(e.target.value) }
                             />
-                        </div>
+                        </Modal.Body>
 
-                        <div className="modal-footer">
-                            <Button type="button"
-                                className="btn btn-warning"
-                                data-dismiss="modal"
+                        <Modal.Footer>
+                            <Button
+                                type="button"
+                                variant="secondary" 
+                                /* onClick={() => setNombre(usuario.nombre)} */
+                                onClick={() => handleClose()}
+                            >
+                            Cerrar
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="primary" 
                                 onClick={e => updateNombre(e)}
                             >
                             Editar
                             </Button>
-                            <Button type="button"
-                                className="btn btn-danger"
-                                data-dismiss="modal"
-                                onClick={e => updateNombre(usuario.nombre)}
-                            >
-                            Cerrar
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                        </Modal.Footer>
 
-            </div>
+            </Modal>
             
         </>
     )

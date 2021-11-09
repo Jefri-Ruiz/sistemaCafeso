@@ -6,7 +6,7 @@ const pool = require('../db.js');
 //Select todos los usuarios funciona
 router.get("/", async(req, res) => {
     try {
-        const todoUsuario = await pool.query("SELECT * FROM usuario");
+        const todoUsuario = await pool.query("SELECT * FROM usuario order by matricula asc"); /* se le puede quitar el order by  */
         res.json(todoUsuario.rows);
     } catch (err) {
         console.error(err.message);
