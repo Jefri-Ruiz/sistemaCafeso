@@ -5,6 +5,7 @@ const SelectProductos = () => {
 
     const getProductos = async () => {
         try {
+
             const response = await fetch("http://localhost:5000/entradas/producto");
             const jsonData = await response.json();
             setProductos(jsonData);
