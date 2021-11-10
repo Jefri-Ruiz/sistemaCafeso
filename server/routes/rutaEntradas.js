@@ -3,7 +3,7 @@ const pool = require('../db.js');
 
 
 //Muestra todas las entradas
-router.get("/", async(req, res) => {
+router.get("/", async (req, res) => {
     try {
         const todoEntrada = await pool.query("SELECT * FROM Entrada");
         res.json(todoEntrada.rows);
@@ -25,22 +25,15 @@ router.post("/", async(req, res) =>{
     }
 });
 
-router.get("/:proveedor", async(req, res) => {
+router.get("/:consulta", async (req, res) => {
     try {
-        const proveedor = await pool.query("SELECT idproveedor, razonsocial FROM proveedor");
-        res.json(proveedor.rows);
-    } catch (err) {
-        console.error(err.message);
-    }
-});
-
-router.get("/:producto", async(req, res) => {
-    try {
-        const producto = await pool.query("SELECT sku, descripcion FROM producto");
-        res.json(producto.rows);
-    } catch (err) {
-        console.error(err.message);
-    }
-});
+        const {consulta} = req.params;
+        if (consulta == 'proveedor') {
+            const proveedor = await pool.query("SELECT idproveedor, razonsocial FROM proveedor");
+            res.json(proveedor.rows);
+        } else if (consulta == 'producto') {
+            const producto = await pool.query("SELECT sku, descripcion FROM producto");
+            res.json(producto.rows);
+        }
 
 module.exports = router;

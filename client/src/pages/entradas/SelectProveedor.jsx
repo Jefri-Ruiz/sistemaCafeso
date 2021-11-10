@@ -5,7 +5,7 @@ const SelectProveedor = () => {
 
     const getProveedor = async () => {
         try {
-            const response = await fetch("http://localhost:5000/Entradas/Proveedor");
+            const response = await fetch("http://localhost:5000/entradas/proveedor");
             const jsonData = await response.json();
             setProveedor(jsonData);
         } catch (err) {
