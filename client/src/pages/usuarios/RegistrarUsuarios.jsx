@@ -48,9 +48,9 @@ const RegistrarUsuarios = () => {
   return (
     <>
       <div className="contenedor">
-        <div className="contenedor__titulo">
+        {/* <div className="contenedor__titulo">
           <h2>Ingrese aquí la información</h2>
-        </div>
+        </div> */}
         <Form onSubmit={onSubmitForm}>
           {/* <Form.Label>Nombre</Form.Label> */}
           <Form.Group className="mb-4" controlId="formNombre">
