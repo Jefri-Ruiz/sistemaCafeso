@@ -31,8 +31,9 @@ const Entradas = () => {
 
 
     const onSubmitForm = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
+            
             const body = { folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario };
             const response = await fetch("http://localhost:5000/entradas", {
                 method: "POST",
@@ -43,6 +44,13 @@ const Entradas = () => {
             console.log(body);
             console.log(response);
 
+            setFolio("");
+            setSku("");
+            setIdProveedor("");
+            setFecha("");
+            setHora("");
+            setCantidad("");
+            setCostoUnitario("");
         } catch (err) {
             console.log(err.message);
         }
@@ -55,7 +63,7 @@ const Entradas = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formFolio">
                             <Form.Label>Folio</Form.Label>
-                            <Form.Control type="text" placeholder="E001"
+                            <Form.Control type="text" placeholder="E001" pattern="^[A-Za-z0-9]{3,16}$" required={true}
                                 value={folio}
                                 onChange={e => setFolio(e.target.value)}
                             />
@@ -65,15 +73,14 @@ const Entradas = () => {
                             <Form.Label>SKU</Form.Label>
                             <Form.Select aria-label="Default select example" value={sku} onChange={e => {setSku(e.target.value)}} >
                             <option>Abrir para seleccionar</option>
-                            <option value="1">1</option>
-                            {/* {
+                            {
                                 SelectProductos().map(producto => (
                                     <option
-                                        key={producto.idproveedor}
-                                        value={proveedor.idproveedor}
-                                    >#{proveedor.idproveedor} | {proveedor.razonsocial} {console.log(proveedor)}</option>
+                                        key={producto.sku}
+                                        value={producto.sku}
+                                    >#{producto.sku} | {producto.descripcion} {console.log(producto)}</option>
                                 ))
-                            } */}
+                            }
                         </Form.Select>
                         </Form.Group>
                     </Row>
