@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, {useState} from "react";
+import { Tabs, Tab } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,8 @@ import RegistrarUsuarios from "./RegistrarUsuarios";
 import "./usuarios.scss";
 
 const Usuarios = () => {
+  const [key, setKey] = useState("Registrar");
+
   return (
     <>
       <div className="usuarios">
@@ -23,12 +25,22 @@ const Usuarios = () => {
             </Breadcrumb>
           </div>
 
-          <div className="usuarios__nav d-flex justify-content-end">
-            <Button variant="outline-primary" onClick={() => alert('Hola madafaka')}>Visualizar usuarios</Button>
-          </div>
-          
-          <RegistrarUsuarios />
-          <ListarUsuarios />
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+            className="mb-2 w-100"
+            style={{ textDecoration: "none" }}
+          >
+            <Tab eventKey="Registrar" title="Registrar">
+              <RegistrarUsuarios />
+            </Tab>
+
+            <Tab eventKey="Revisar y buscar" title="Revisar y buscar">
+              <ListarUsuarios />
+            </Tab>
+
+          </Tabs>
         </div>
       </div>
     </>
