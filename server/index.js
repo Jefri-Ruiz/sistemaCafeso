@@ -7,6 +7,7 @@ const rutaUsuarios = require("./routes/rutaUsuarios");
 const rutaEntradas = require("./routes/rutaEntradas");
 const rutaSalidas = require("./routes/rutaSalidas");
 const rutaProveedores = require("./routes/rutaProveedores");
+const rutaInsumos = require("./routes/rutaInsumos");
 const rutaClientes = require("./routes/rutaClientes");
 const rutaProductos = require("./routes/rutaProductos");
 //middleware
@@ -29,6 +30,7 @@ app.use("/salidas", rutaSalidas);
 app.use("/proveedores", rutaProveedores);
 app.use("/clientes", rutaClientes);
 app.use("/productos", rutaProductos);
+app.use("/insumos", rutaInsumos);
 
 
 
