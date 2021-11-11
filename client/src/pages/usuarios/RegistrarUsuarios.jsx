@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 
 const RegistrarUsuarios = () => {
   /*   const [datos, setDatos] = useState({
@@ -54,45 +54,58 @@ const RegistrarUsuarios = () => {
         <Form onSubmit={onSubmitForm}>
           {/* <Form.Label>Nombre</Form.Label> */}
           <Form.Group className="mb-4" controlId="formNombre">
+          <Form.Label>Nombre</Form.Label>
             <Form.Control
               autoComplete="off"
               type="text"
-              placeholder="Nombre"
+              placeholder="Albert"
+              /* errorMessage = "El nombre del usuario debe tener entre 3 a 16 caracteres y no debe contener caracteres especiales!" */
+              pattern= "^[A-Za-z]{3,16}$"
+              required= {true}
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formPaterno">
+          <Form.Group as={Col} className="mb-4" controlId="formPaterno">
+          <Form.Label>Apellido paterno</Form.Label>
             <Form.Control
               autoComplete="off"
               type="text"
-              placeholder="Apellido paterno"
+              placeholder="Einstein"
+              pattern= "^[A-Za-z]{3,20}$"
+              required= {true}
               value={apellidopaterno}
               onChange={(e) => setApellidopaterno(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-4" controlId="formMaterno">
+          <Form.Label>Apellido materno</Form.Label>
             <Form.Control
               autoComplete="off"
               type="text"
-              placeholder="Apellido materno"
+              placeholder="Perez"
+              pattern= "^[A-Za-z]{3,16}$"
+              required= {true}
               value={apellidomaterno}
               onChange={(e) => setApellidomaterno(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formPass">
+          <Form.Label>Contraseña</Form.Label>
             <Form.Control
               autoComplete="off"
               type="text"
-              placeholder="Password"
+              placeholder="Tu contraseña"
+              pattern= "^[A-Za-z0-9!@#$%^&*]{5,20}$" //^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$
+              required= {true}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Form.Text className="text-muted">
-              Asegurese ingresar correctamente la contraseña
+              Asegurese ingresar una contraseña con minimo cinco caracteres
             </Form.Text>
           </Form.Group>
 
