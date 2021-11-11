@@ -20,7 +20,7 @@ const ListarUsuarios = () => {
       setUsuarios(
         usuarios.filter((usuario) => usuario.matricula !== matricula)
       );
-      alert("El usuario ha sido eliminado")
+      alert("El usuario será eliminado")
     } catch (err) {
       console.error(err.message);
     }
@@ -76,7 +76,7 @@ const ListarUsuarios = () => {
               <td>{usuario.apellidomaterno}</td>
 
               <td className="d-flex justify-content-around align-items-center">
-                <EditarUsuario usuario={usuario} />
+                <EditarUsuario usuario={usuario} getUsuarios={getUsuarios}/>
                 <Button
                   className="btn btn-danger"
                   onClick={() => deleteUsuario(usuario.matricula)}
