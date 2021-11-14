@@ -33,7 +33,6 @@ const Entradas = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            
             const body = { folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario };
             const response = await fetch("http://localhost:5000/entradas", {
                 method: "POST",
@@ -43,7 +42,7 @@ const Entradas = () => {
             });
             console.log(body);
             console.log(response);
-
+          
             setFolio("");
             setSku("");
             setIdProveedor("");
@@ -81,6 +80,7 @@ const Entradas = () => {
                                     >#{producto.sku} | {producto.descripcion} {console.log(producto)}</option>
                                 ))
                             }
+
                         </Form.Select>
                         </Form.Group>
                     </Row>
