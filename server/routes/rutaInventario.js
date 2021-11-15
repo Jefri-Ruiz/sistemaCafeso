@@ -11,4 +11,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+//Crear nuevo folio
+router.post("/", async (req, res) => {
+    try {
+        const { idInventario, fecha, hora, sku, descripcion, stockSistema, stockFisico, precioUnitario } = req.body;
+        const newInventario = await pool.query("INSERT INTO Inventario VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING idInventario, fecha, hora, sku, descripcion, stockSistema, stockFisico, precioUnitario", [idInventario, fecha, hora, sku, descripcion, stockSistema, stockFisico, precioUnitario]);
+        res.json(newInventario.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 module.exports = router;

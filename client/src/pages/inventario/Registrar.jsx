@@ -18,7 +18,7 @@ const Registrar = () => {
         try {
 
             const body = { idInventario, fecha, hora, sku, descripcion, stockSistema, stockFisico, precioUnitario };
-            const response = await fetch("http://localhost:5000/entradas", {
+            const response = await fetch("http://localhost:5000/inventario", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
