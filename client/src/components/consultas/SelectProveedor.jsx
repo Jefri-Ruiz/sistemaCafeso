@@ -18,10 +18,6 @@ const SelectProveedor = () => {
     
     }, []);
 
-    // useEffect(() => {
-    //     getProveedor();
-        
-    // }, [proveedor])
     return proveedor;
 }
 

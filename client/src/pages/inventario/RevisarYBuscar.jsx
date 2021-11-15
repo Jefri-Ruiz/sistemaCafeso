@@ -4,41 +4,34 @@ import * as FaIcons from 'react-icons/fa';
 
 const RevisarYBuscar = () => {
 
-    const [salidas, setSalidas] = useState([]);
+    const [inventario, setInventario] = useState([]);
     const [buscar, setBuscar] = useState("");
 
-    const getSalidas = async () => {
+    const getInventario = async () => {
         try {
-            const response = await fetch("http://localhost:5000/salidas");
+            const response = await fetch("http://localhost:5000/inventario");
             const jsonData = await response.json();
-            setSalidas(jsonData);
+            setInventario(jsonData);
         } catch (err) {
             console.error(err.message);
         }
     }
 
     useEffect(() => {
-        getSalidas();
+        getInventario();
     }, [])
 
-    const filtroSalidas = salidas.filter(entrada => (
-        entrada.folio.toUpperCase().includes(buscar.toUpperCase()) ||
-        entrada.fecha.includes(buscar)
+    const filtroInventario = inventario.filter(inv => (
+        inv.fecha.includes(buscar)
     ));
 
     return (
         <>
             <div className="entradas__nav" >
-                <Button variant="primary" onClick={getSalidas}>Refrescar</Button>
+                <Button variant="primary" onClick={getInventario}>Refrescar</Button>
             </div>
             <Form>
                 <Row className="align-items-center">
-                    <Col className="mb-3">
-                        <Form.Label>Buscar por Folio</Form.Label>
-                        <Form.Group controlId="formBuscar">
-                            <Form.Control type="text" placeholder="S001" onChange={e => setBuscar(e.target.value)}></Form.Control>
-                        </Form.Group>
-                    </Col>
                     <Col className="mb-3">
                         <Form.Label>Buscar por fecha...</Form.Label>
                         <Form.Group controlId="formBuscar">
@@ -50,31 +43,29 @@ const RevisarYBuscar = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Folio</th>
-                        <th>SKU</th>
-                        <th>ID Cliente</th>
+                        <th>ID Inventario</th>
                         <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Cantidad</th>
-                        <th>Precio Publico</th>
-                        <th>Descuento</th>
-                        <th>Monto Total</th>
+                        <th>SKU</th>
+                        <th>Descripcion</th>
+                        <th>Stock sistema</th>
+                        <th>Stock fisico</th>
+                        <th>Precio unitario</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filtroSalidas.map(salida => (
-                        <tr key={salida.folio}>
-                            <td>{salida.folio}</td>
-                            <td>{salida.sku}</td>
-                            <td>{salida.idcliente}</td>
-                            <td>{salida.fecha}</td>
-                            <td>{salida.hora}</td>
-                            <td>{salida.cantidad}</td>
-                            <td>$ {salida.preciopublico}</td>
-                            <td>{salida.descuento} %</td>
-                            <td>$ {salida.montototal}</td>
+                    {filtroInventario.map(inventario => (
+                        <tr key={inventario.idinventario}>
+                            <td>{inventario.idinventario}</td>
+                            <td>{inventario.fecha}</td>
+                            <td>{inventario.hora}</td>
+                            <td>{inventario.sku}</td>
+                            <td>{inventario.descripcion}</td>
+                            <td>{inventario.stocksistema}</td>
+                            <td>{inventario.stockfisico}</td>
+                            <td>$ {inventario.preciounitario}</td>
                             <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarUsuario usuario={usuario}/> */}</td>
                             <td><Button className="btn btn-danger" /* onClick={borrarUsuario(usuario.matricula)} */><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
                         </tr>

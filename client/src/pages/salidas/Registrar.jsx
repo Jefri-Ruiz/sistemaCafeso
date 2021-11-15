@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
+import { Form, Button, Row, Col, InputGroup} from "react-bootstrap";
+import SelectProductos from "../../components/consultas/SelectProductos";
+import SelectClientes from "../../components/consultas/SelectClientes";
 
 const Salidas = () => {
 
@@ -14,18 +16,23 @@ const Salidas = () => {
 
 
     const onSubmitForm = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             const body = { folio, sku, idCliente, fecha, hora, cantidad, precioPublico, descuento };
             const response = await fetch("http://localhost:5000/salidas", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
-
             });
-            console.log(body);
             console.log(response);
-
+            setFolio("");
+            setSku("");
+            setIdCliente("");
+            setFecha("");
+            setHora("");
+            setCantidad("");
+            setPrecioPublico("");
+            setDescuento("");
         } catch (err) {
             console.log(err.message);
         }
@@ -38,7 +45,7 @@ const Salidas = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formFolio">
                             <Form.Label>Folio</Form.Label>
-                            <Form.Control type="text" placeholder="E001"
+                            <Form.Control type="text" placeholder="S001"
                                 value={folio}
                                 onChange={e => setFolio(e.target.value)}
                             />
@@ -48,7 +55,14 @@ const Salidas = () => {
                             <Form.Label>SKU</Form.Label>
                             <Form.Select aria-label="Default select example" value={sku} onChange={e => { setSku(e.target.value) }} >
                                 <option>Abrir para seleccionar</option>
-                                <option value="1">1</option>
+                                {
+                                    SelectProductos().map(producto => (
+                                        <option
+                                            key={producto.sku}
+                                            value={producto.sku}
+                                        >#{producto.sku} | {producto.descripcion}</option>
+                                    ))
+                                }
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -56,7 +70,14 @@ const Salidas = () => {
                         <Form.Label>ID Cliente</Form.Label>
                         <Form.Select aria-label="Default select example" value={idCliente} onChange={e => { setIdCliente(e.target.value) }} >
                             <option>Abrir para seleccionar</option>
-                            <option value="1">1</option>
+                            {
+                                SelectClientes().map(cliente => (
+                                    <option
+                                        key={cliente.idcliente}
+                                        value={cliente.idcliente}
+                                    >#{cliente.idcliente} | Nombre: {cliente.nombre} {cliente.apellidopaterno} {cliente.apellidomaterno} | RFC: {cliente.rfc}</option>
+                                ))
+                            }
                         </Form.Select>
                     </Form.Group>
                     <Row className="align-items-center">
@@ -114,7 +135,7 @@ const Salidas = () => {
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control type="number"
                                     value={(cantidad * precioPublico) - (((cantidad * precioPublico) * descuento) / 100)}
-                                    onChange={() => { return ((cantidad * precioPublico) - ((cantidad * precioPublico) * descuento) / 100)}}
+                                    onChange={() => { return ((cantidad * precioPublico) - ((cantidad * precioPublico) * descuento) / 100) }}
                                 />
                             </InputGroup>
                         </Form.Group>
