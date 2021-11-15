@@ -2,20 +2,20 @@ import React, { useState } from 'react'
 import { Tabs, Tab } from "react-bootstrap";
 import RevisarYBuscar from "./RevisarYBuscar";
 import Registrar from "./Registrar";
-import "./productos.scss";
+import "./insumos.scss";
 
-const Productos = () => {
+const Insumos = () => {
 
   const [key, setKey] = useState('Registrar');
 
   return (
     <>
-      <div className="productos">
+      <div className="insumos">
         <div className="container">
-          <div className="productos__titulo">
-            <h2>Productos</h2>
+          <div className="insumos__titulo">
+            <h2>Insumos</h2>
           </div>
-
+          
           <Tabs
             id="controlled-tab-example"
             activeKey={key}
@@ -37,4 +37,4 @@ const Productos = () => {
   )
 }
 
-export default Productos
+export default Insumos
