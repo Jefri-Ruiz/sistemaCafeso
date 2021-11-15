@@ -5,15 +5,15 @@
     padding: 1.5rem 1rem 1rem 1rem;
     /* border: 2px solid red; */
     width: 100%;
-    height: fit-content;
+    min-height: 900px ;
     overflow: hidden;
 
     &__titulo{
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
     
     &__nav{
-        margin: 1rem 0;
+        margin: 2rem 0;
         width: 100%;
     }
 
