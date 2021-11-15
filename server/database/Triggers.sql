@@ -48,7 +48,7 @@ END;
 create trigger accion_valoresInsumo after insert or update on insumo  
 for each row execute procedure calculo_valoresInsumo();
 
-/* INVENTARIOS errrrrrrrrrrr*/
+/* INVENTARIOS */
 --  funcion  --
 CREATE OR REPLACE FUNCTION calculo_inventario() RETURNS trigger AS
 '
@@ -69,7 +69,7 @@ BEGIN
    END IF;
 
    IF(NEW.sku = skuProducto) THEN
-      invProducto := (SELECT stocksistema-stockfisico FROM inventario WHERE idinventario = NEW.idinventario);
+      invProducto := (SELECT stockfisico FROM inventario WHERE idinventario = NEW.idinventario);
       UPDATE producto SET stocksistema = invProducto WHERE sku = NEW.sku;
       valorAlmacenP := (SELECT preciopublico*stocksistema FROM producto WHERE sku = NEW.sku);
       UPDATE producto SET valoralmacen = valorAlmacenP WHERE sku = NEW.sku;
@@ -77,7 +77,7 @@ BEGIN
    END IF;
 
    IF(NEW.sku = skuInsumo) THEN
-      invInsumo := (SELECT stocksistema-stockfisico FROM inventario WHERE idinventario = NEW.idinventario);
+      invInsumo := (SELECT stockfisico FROM inventario WHERE idinventario = NEW.idinventario);
       UPDATE insumo SET stocksistema = invInsumo WHERE sku = NEW.sku;
       valorAlmacenI := (SELECT costounitario*stocksistema FROM insumo WHERE sku = NEW.sku);
       UPDATE insumo SET valoralmacen = valorAlmacenI WHERE sku = NEW.sku;
