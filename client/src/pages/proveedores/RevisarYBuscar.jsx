@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Button } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
+import EditarProveedor from './EditarProveedor';
 
 const RevisarYBuscar = () => {
-    
+
     const [proveedores, setProveedores] = useState([]);
 
     const getProveedores = async () => {
@@ -35,7 +36,7 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-        <Button onClick={getProveedores}>Refrescar</Button>
+            <Button onClick={getProveedores}>Refrescar</Button>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -45,8 +46,7 @@ const RevisarYBuscar = () => {
                         <th>Telefono</th>
                         <th>Correo</th>
                         <th>Direccion</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,8 +58,16 @@ const RevisarYBuscar = () => {
                             <td>{proveedor.telefono}</td>
                             <td>{proveedor.correo}</td>
                             <td>{proveedor.direccion}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button></td>
-                            <td><Button className="btn btn-danger" onClick={() => borrarProveedor(proveedor.idproveedor)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+
+                            <td className="d-flex justify-content-around align-items-center">
+                                <EditarProveedor proveedor={proveedor} getProveedores={getProveedores} />
+                                <Button
+                                    className="btn btn-danger"
+                                    onClick={() => borrarProveedor(proveedor.idproveedor)}
+                                >
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
