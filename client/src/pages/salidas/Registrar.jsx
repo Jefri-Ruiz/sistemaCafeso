@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-
+import SelectProductos from "./SelectProductos";
 const Salidas = () => {
 
     const [folio, setFolio] = useState("");
@@ -14,8 +14,8 @@ const Salidas = () => {
 
 
     const onSubmitForm = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             const body = { folio, sku, idCliente, fecha, hora, cantidad, precioPublico, descuento };
             const response = await fetch("http://localhost:5000/salidas", {
                 method: "POST",
@@ -25,7 +25,15 @@ const Salidas = () => {
             });
             console.log(body);
             console.log(response);
-
+            
+            setFolio("");
+            setSku("");
+            setIdCliente("");
+            setFecha("");
+            setHora("");
+            setCantidad("");
+            setPrecioPublico("");
+            setDescuento("");
         } catch (err) {
             console.log(err.message);
         }
@@ -48,7 +56,14 @@ const Salidas = () => {
                             <Form.Label>SKU</Form.Label>
                             <Form.Select aria-label="Default select example" value={sku} onChange={e => { setSku(e.target.value) }} >
                                 <option>Abrir para seleccionar</option>
-                                <option value="1">1</option>
+                                {
+                                    SelectProductos().map(producto => (
+                                        <option
+                                            key={producto.sku}
+                                            value={producto.sku}
+                                        >#{producto.sku} | {producto.descripcion} {console.log(producto)}</option>
+                                    ))
+                                }
                             </Form.Select>
                         </Form.Group>
                     </Row>
@@ -114,7 +129,7 @@ const Salidas = () => {
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control type="number"
                                     value={(cantidad * precioPublico) - (((cantidad * precioPublico) * descuento) / 100)}
-                                    onChange={() => { return ((cantidad * precioPublico) - ((cantidad * precioPublico) * descuento) / 100)}}
+                                    onChange={() => { return ((cantidad * precioPublico) - ((cantidad * precioPublico) * descuento) / 100) }}
                                 />
                             </InputGroup>
                         </Form.Group>
