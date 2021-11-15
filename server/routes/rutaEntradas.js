@@ -25,6 +25,16 @@ router.post("/", async (req, res) => {
     }
 });
 
+// router.get("/:folio", async (req, res) => {
+//     try {
+//         const {folio} = req.params;
+//         const entrada = await pool.query("SELECT * FROM entrada WHERE folio = $1", [folio]);
+//         res.json(entrada.rows);
+//     } catch (err) {
+//         console.error(err.message);
+//     }
+// });
+
 router.get("/:consulta", async (req, res) => {
     try {
         const { consulta } = req.params;
@@ -38,9 +48,25 @@ router.get("/:consulta", async (req, res) => {
             const cliente = await pool.query("SELECT idcliente, nombre, apellidopaterno, apellidomaterno, rfc FROM cliente");
             res.json(cliente.rows);
         }
+        else {
+            const { consulta } = req.params;
+            const entrada = await pool.query("SELECT * FROM entrada WHERE folio = $1", [consulta.toLocaleUpperCase()]);
+            res.json(entrada.rows);
+        }
     } catch (err) {
         console.error(err.message);
     }
 })
+
+router.put("/:folio", async (req, res) => {
+    try {
+        const {folio} = req.params;
+        const {sku, idProveedor, fecha, hora, cantidad, costoUnitario } = req.body;
+        const entradaUpdate = await pool.query("UPDATE entrada SET sku = $1, idProveedor = $2, fecha = $3, hora = $4, cantidad = $5, costoUnitario = $6 WHERE folio = $7", [sku, idProveedor, fecha, hora, cantidad, costoUnitario, folio.toLocaleUpperCase()]);
+        res.json("Fue actualizado!");
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 module.exports = router;
