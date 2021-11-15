@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 
 const RevisarYBuscar = () => {
 
     const [inventario, setInventario] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getInventario = async () => {
         try {
@@ -20,15 +21,29 @@ const RevisarYBuscar = () => {
         getInventario();
     }, [])
 
-    console.log(inventario);
+    const filtroInventario = inventario.filter(inv => (
+        inv.fecha.includes(buscar)
+    ));
 
     return (
         <>
-        <Button onClick={getInventario}>Refrescar</Button>
+            <div className="entradas__nav" >
+                <Button variant="primary" onClick={getInventario}>Refrescar</Button>
+            </div>
+            <Form>
+                <Row className="align-items-center">
+                    <Col className="mb-3">
+                        <Form.Label>Buscar por fecha...</Form.Label>
+                        <Form.Group controlId="formBuscar">
+                            <Form.Control type="date" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Form>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>ID Inventario</th>                        
+                        <th>ID Inventario</th>
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>SKU</th>
@@ -41,7 +56,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {inventario.map(inventario => (
+                    {filtroInventario.map(inventario => (
                         <tr key={inventario.idinventario}>
                             <td>{inventario.idinventario}</td>
                             <td>{inventario.fecha}</td>

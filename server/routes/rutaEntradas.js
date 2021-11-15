@@ -34,6 +34,9 @@ router.get("/:consulta", async (req, res) => {
         } else if (consulta == 'producto') {
             const producto = await pool.query("SELECT sku, descripcion FROM producto");
             res.json(producto.rows);
+        } else if (consulta == 'cliente') {
+            const cliente = await pool.query("SELECT idcliente, nombre, apellidopaterno, apellidomaterno, rfc FROM cliente");
+            res.json(cliente.rows);
         }
     } catch (err) {
         console.error(err.message);

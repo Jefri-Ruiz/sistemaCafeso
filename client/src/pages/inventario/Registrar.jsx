@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-
+import SelectProductos from "../../components/consultas/SelectProductos";
 
 const Registrar = () => {
 
@@ -23,9 +23,7 @@ const Registrar = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
-            console.log(body);
             console.log(response);
-
             setIdInventario("");
             setFecha("");
             setHora("");
@@ -71,11 +69,19 @@ const Registrar = () => {
                             <Form.Label>SKU</Form.Label>
                             <Form.Select aria-label="Default select example" value={sku} onChange={e => { setSku(e.target.value) }} >
                                 <option>Abrir para seleccionar</option>
+                                {
+                                    SelectProductos().map(producto => (
+                                        <option
+                                            key={producto.sku}
+                                            value={producto.sku}
+                                        >#{producto.sku} | {producto.descripcion}</option>
+                                    ))
+                                }
                             </Form.Select>
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3" controlId="formDescripcion">
                             <Form.Label>Descripcion</Form.Label>
-                            <Form.Control type="text" placeholder="Descripcion" 
+                            <Form.Control type="text" placeholder="Descripcion"
                                 value={descripcion}
                                 onChange={e => setDescripcion(e.target.value)}
                             />

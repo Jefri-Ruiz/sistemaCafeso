@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-import SelectProductos from "./SelectProductos";
+import { Form, Button, Row, Col, InputGroup} from "react-bootstrap";
+import SelectProductos from "../../components/consultas/SelectProductos";
+import SelectClientes from "../../components/consultas/SelectClientes";
+
 const Salidas = () => {
 
     const [folio, setFolio] = useState("");
@@ -21,11 +23,8 @@ const Salidas = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
-
             });
-            console.log(body);
             console.log(response);
-            
             setFolio("");
             setSku("");
             setIdCliente("");
@@ -46,7 +45,7 @@ const Salidas = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formFolio">
                             <Form.Label>Folio</Form.Label>
-                            <Form.Control type="text" placeholder="E001"
+                            <Form.Control type="text" placeholder="S001"
                                 value={folio}
                                 onChange={e => setFolio(e.target.value)}
                             />
@@ -61,7 +60,7 @@ const Salidas = () => {
                                         <option
                                             key={producto.sku}
                                             value={producto.sku}
-                                        >#{producto.sku} | {producto.descripcion} {console.log(producto)}</option>
+                                        >#{producto.sku} | {producto.descripcion}</option>
                                     ))
                                 }
                             </Form.Select>
@@ -71,7 +70,14 @@ const Salidas = () => {
                         <Form.Label>ID Cliente</Form.Label>
                         <Form.Select aria-label="Default select example" value={idCliente} onChange={e => { setIdCliente(e.target.value) }} >
                             <option>Abrir para seleccionar</option>
-                            <option value="1">1</option>
+                            {
+                                SelectClientes().map(cliente => (
+                                    <option
+                                        key={cliente.idcliente}
+                                        value={cliente.idcliente}
+                                    >#{cliente.idcliente} | Nombre: {cliente.nombre} {cliente.apellidopaterno} {cliente.apellidomaterno} | RFC: {cliente.rfc}</option>
+                                ))
+                            }
                         </Form.Select>
                     </Form.Group>
                     <Row className="align-items-center">

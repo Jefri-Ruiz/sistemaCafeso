@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 
 const RevisarYBuscar = () => {
 
     const [salidas, setSalidas] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getSalidas = async () => {
         try {
@@ -20,11 +21,32 @@ const RevisarYBuscar = () => {
         getSalidas();
     }, [])
 
-    console.log(salidas);
+    const filtroSalidas = salidas.filter(entrada => (
+        entrada.folio.toUpperCase().includes(buscar.toUpperCase()) ||
+        entrada.fecha.includes(buscar)
+    ));
 
     return (
         <>
-        <Button onClick={getSalidas}>Refrescar</Button>
+            <div className="entradas__nav" >
+                <Button variant="primary" onClick={getSalidas}>Refrescar</Button>
+            </div>
+            <Form>
+                <Row className="align-items-center">
+                    <Col className="mb-3">
+                        <Form.Label>Buscar por Folio</Form.Label>
+                        <Form.Group controlId="formBuscar">
+                            <Form.Control type="text" placeholder="S001" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col className="mb-3">
+                        <Form.Label>Buscar por fecha...</Form.Label>
+                        <Form.Group controlId="formBuscar">
+                            <Form.Control type="date" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Form>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -42,7 +64,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {salidas.map(salida => (
+                    {filtroSalidas.map(salida => (
                         <tr key={salida.folio}>
                             <td>{salida.folio}</td>
                             <td>{salida.sku}</td>

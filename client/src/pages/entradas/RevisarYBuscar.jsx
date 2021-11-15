@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 
 const RevisarYBuscar = () => {
 
     const [entradas, setEntradas] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getEntradas = async () => {
+
         try {
             const response = await fetch("http://localhost:5000/entradas");
             const jsonData = await response.json();
@@ -20,11 +22,32 @@ const RevisarYBuscar = () => {
         getEntradas();
     }, [])
 
-    console.log(entradas);
+    const filtroEntradas = entradas.filter(entrada => (
+        entrada.folio.toUpperCase().includes(buscar.toUpperCase()) ||
+        entrada.fecha.includes(buscar)
+    ));
 
     return (
         <>
-        <Button onClick={getEntradas}>Refrescar</Button>
+            <div className="entradas__nav" >
+                <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
+            </div>
+            <Form>
+                <Row className="align-items-center">
+                    <Col className="mb-3">
+                        <Form.Label>Buscar por Folio</Form.Label>
+                        <Form.Group controlId="formBuscar">
+                            <Form.Control type="text" placeholder="E001" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col className="mb-3">
+                        <Form.Label>Buscar por fecha...</Form.Label>
+                        <Form.Group controlId="formBuscar">
+                            <Form.Control type="date" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Form>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -41,7 +64,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {entradas.map(entrada => (
+                    {filtroEntradas.map(entrada => (
                         <tr key={entrada.folio}>
                             <td>{entrada.folio}</td>
                             <td>{entrada.sku}</td>
@@ -51,8 +74,8 @@ const RevisarYBuscar = () => {
                             <td>{entrada.cantidad}</td>
                             <td>$ {entrada.costounitario}</td>
                             <td>$ {entrada.costototal}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarUsuario usuario={usuario}/> */}</td>
-                            <td><Button className="btn btn-danger" /* onClick={borrarUsuario(usuario.matricula)} */><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button></td>
+                            <td><Button className="btn btn-danger" ><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
                         </tr>
                     ))}
                 </tbody>

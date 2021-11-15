@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-import SelectProductos from "./SelectProductos";
-import SelectProveedor from "./SelectProveedor";
+import SelectProductos from "../../components/consultas/SelectProductos";
+import SelectProveedor from "../../components/consultas/SelectProveedor";
 
 const Entradas = () => {
 
@@ -40,7 +40,7 @@ const Entradas = () => {
                 body: JSON.stringify(body)
 
             });
-            console.log(body);
+
             console.log(response);
           
             setFolio("");
@@ -77,7 +77,7 @@ const Entradas = () => {
                                     <option
                                         key={producto.sku}
                                         value={producto.sku}
-                                    >#{producto.sku} | {producto.descripcion} {console.log(producto)}</option>
+                                    >#{producto.sku} | {producto.descripcion} </option>
                                 ))
                             }
 
@@ -93,7 +93,7 @@ const Entradas = () => {
                                     <option
                                         key={proveedor.idproveedor}
                                         value={proveedor.idproveedor}
-                                    >#{proveedor.idproveedor} | {proveedor.razonsocial} {console.log(proveedor)}</option>
+                                    >#{proveedor.idproveedor} | {proveedor.razonsocial} </option>
                                 ))
                             }
                         </Form.Select>
