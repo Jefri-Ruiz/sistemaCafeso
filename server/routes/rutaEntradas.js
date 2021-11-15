@@ -14,12 +14,12 @@ router.get("/", async (req, res) => {
 
 
 //Crear nuevo folio
-router.post("/", async(req, res) =>{
+router.post("/", async (req, res) => {
     try {
-        const {folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario} = req.body;
-        const newEntrada = await pool.query("insert into Entrada (folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario) values ($1, $2, $3, $4, $5, $6, $7) RETURNING folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario",[folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario] );
+        const { folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario } = req.body;
+        const newEntrada = await pool.query("insert into Entrada (folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario) values ($1, $2, $3, $4, $5, $6, $7) RETURNING folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario", [folio, sku, idProveedor, fecha, hora, cantidad, costoUnitario]);
         res.json(newEntrada.rows[0]);
-        
+
     } catch (err) {
         console.error(err.message);
     }
@@ -27,7 +27,7 @@ router.post("/", async(req, res) =>{
 
 router.get("/:consulta", async (req, res) => {
     try {
-        const {consulta} = req.params;
+        const { consulta } = req.params;
         if (consulta == 'proveedor') {
             const proveedor = await pool.query("SELECT idproveedor, razonsocial FROM proveedor");
             res.json(proveedor.rows);
@@ -35,5 +35,9 @@ router.get("/:consulta", async (req, res) => {
             const producto = await pool.query("SELECT sku, descripcion FROM producto");
             res.json(producto.rows);
         }
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
 module.exports = router;
