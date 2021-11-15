@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Row } from "react-bootstrap";
 
 const RegistrarUsuarios = () => {
   /*   const [datos, setDatos] = useState({
@@ -52,8 +52,10 @@ const RegistrarUsuarios = () => {
           <h2>Ingrese aquí la información</h2>
         </div> */}
         <Form onSubmit={onSubmitForm}>
-          {/* <Form.Label>Nombre</Form.Label> */}
-          <Form.Group className="mb-4" controlId="formNombre">
+          
+          <Row className="align-items-center">
+
+          <Form.Group as={Col} className="mb-4" controlId="formNombre">
           <Form.Label>Nombre</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -66,7 +68,7 @@ const RegistrarUsuarios = () => {
               onChange={(e) => setNombre(e.target.value)}
             />
           </Form.Group>
-
+          
           <Form.Group as={Col} className="mb-4" controlId="formPaterno">
           <Form.Label>Apellido paterno</Form.Label>
             <Form.Control
@@ -80,7 +82,11 @@ const RegistrarUsuarios = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formMaterno">
+          </Row>
+
+          <Row className="align-items-center justify-center">
+            
+          <Form.Group as={Col} className="mb-4" controlId="formMaterno">
           <Form.Label>Apellido materno</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -93,7 +99,7 @@ const RegistrarUsuarios = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formPass">
+          <Form.Group as={Col} className="mb-4" controlId="formPass">
           <Form.Label>Contraseña</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -104,10 +110,11 @@ const RegistrarUsuarios = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Form.Text className="text-muted">
+            {/* <Form.Text className="text-muted">
               Asegurese ingresar una contraseña con minimo cinco caracteres
-            </Form.Text>
+            </Form.Text> */}
           </Form.Group>
+          </Row>
 
           <br />
 

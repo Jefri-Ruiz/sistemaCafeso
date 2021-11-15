@@ -68,7 +68,7 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
             <Modal className="Modal"
                 show={show} 
                 onHide={handleClose}
-                backdrope="static"
+                backdrop="static"
                 keyboard={false}
                 id={`matricula${usuario.matricula}`}
                 onClick={()=> setNombre(usuario.nombre) && 
