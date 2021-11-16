@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
+import Editar from './Editar';
 
 const RevisarYBuscar = () => {
 
     const [inventario, setInventario] = useState([]);
     const [buscar, setBuscar] = useState("");
+
+    //Delete function
+    const deleteInventario = async (idInventario) => {
+        try {
+            const request = await fetch(`http://localhost:5000/inventario/${idInventario}`, {
+                method: "DELETE"
+            });   
+            console.log(request);
+            setInventario(inventario.filter(inventario => inventario.idinventario !== idInventario));
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
 
     const getInventario = async () => {
         try {
@@ -15,7 +29,7 @@ const RevisarYBuscar = () => {
         } catch (err) {
             console.error(err.message);
         }
-    }
+    };
 
     useEffect(() => {
         getInventario();
@@ -66,8 +80,8 @@ const RevisarYBuscar = () => {
                             <td>{inventario.stocksistema}</td>
                             <td>{inventario.stockfisico}</td>
                             <td>$ {inventario.preciounitario}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarUsuario usuario={usuario}/> */}</td>
-                            <td><Button className="btn btn-danger" /* onClick={borrarUsuario(usuario.matricula)} */><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td><Editar inventario = {inventario} /></td>
+                            <td><Button className="btn btn-danger" onClick={() => deleteInventario(inventario.idinventario)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
                         </tr>
                     ))}
                 </tbody>

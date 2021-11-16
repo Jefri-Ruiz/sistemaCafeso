@@ -24,16 +24,6 @@ router.post("/", async (req, res) => {
     }
 });
 
-// router.get("/:folio", async (req, res) => {
-//     try {
-//         const {folio} = req.params;
-//         const entrada = await pool.query("SELECT * FROM entrada WHERE folio = $1", [folio]);
-//         res.json(entrada.rows);
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// });
-
 router.get("/:consulta", async (req, res) => {
     try {
         const { consulta } = req.params;

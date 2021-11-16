@@ -52,7 +52,7 @@ const Editar = ({ salida }) => {
                         <Row className="align-items-center">
                             <Form.Group as={Col} className="mb-3" controlId="formFolio">
                                 <Form.Label>Folio</Form.Label>
-                                <Form.Control type="text" disabled="off"
+                                <Form.Control type="text" disabled
                                     value={salida.folio}
                                 />
                             </Form.Group>
