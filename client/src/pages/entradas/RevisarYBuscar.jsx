@@ -13,7 +13,7 @@ const RevisarYBuscar = () => {
         try {
             const request = await fetch(`http://localhost:5000/entradas/${folio}`, {
                 method: "DELETE"
-            });   
+            });
             console.log(request);
             setEntradas(entradas.filter(entrada => entrada.folio !== folio));
         } catch (err) {
@@ -74,8 +74,7 @@ const RevisarYBuscar = () => {
                         <th>Cantidad</th>
                         <th>Costo Unitario</th>
                         <th>Costo Total</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,8 +88,12 @@ const RevisarYBuscar = () => {
                             <td>{entrada.cantidad}</td>
                             <td>$ {entrada.costounitario}</td>
                             <td>$ {entrada.costototal}</td>
-                            <td><Editar entrada = {entrada}/></td>
-                            <td><Button className="btn btn-danger" onClick={() => deleteEntrada(entrada.folio)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td className="d-flex justify-content-around align-items-center">
+                                <Editar entrada={entrada} />
+                                <Button className="btn btn-danger" onClick={() => deleteEntrada(entrada.folio)}>
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

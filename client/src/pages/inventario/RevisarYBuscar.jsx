@@ -13,7 +13,7 @@ const RevisarYBuscar = () => {
         try {
             const request = await fetch(`http://localhost:5000/inventario/${idInventario}`, {
                 method: "DELETE"
-            });   
+            });
             console.log(request);
             setInventario(inventario.filter(inventario => inventario.idinventario !== idInventario));
         } catch (err) {
@@ -57,7 +57,7 @@ const RevisarYBuscar = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>ID Inventario</th>
+                        <th>ID</th>
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>SKU</th>
@@ -65,8 +65,7 @@ const RevisarYBuscar = () => {
                         <th>Stock sistema</th>
                         <th>Stock fisico</th>
                         <th>Precio unitario</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,8 +79,12 @@ const RevisarYBuscar = () => {
                             <td>{inventario.stocksistema}</td>
                             <td>{inventario.stockfisico}</td>
                             <td>$ {inventario.preciounitario}</td>
-                            <td><Editar inventario = {inventario} /></td>
-                            <td><Button className="btn btn-danger" onClick={() => deleteInventario(inventario.idinventario)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td className="d-flex justify-content-around align-items-center">
+                                <Editar inventario={inventario} />
+                                <Button className="btn btn-danger" onClick={() => deleteInventario(inventario.idinventario)}>
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

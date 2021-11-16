@@ -1,7 +1,7 @@
 create database cafeso;
 
 create table Usuario (
-    matricula smallint primary key,
+    matricula serial primary key,
     password varchar(50) not null,
     nombre varchar(50) not null,
     apellidoPaterno varchar(50) not null,
