@@ -108,7 +108,7 @@ BEGIN
    IF(NEW.sku IS NOT NULL) THEN
 
       costoTotalE := (SELECT cantidad*costounitario FROM entrada WHERE folio = NEW.folio);
-      UPDATE entrada SET costototal = costoTotalE WHERE sku = NEW.sku;
+      UPDATE entrada SET costototal = costoTotalE WHERE folio = NEW.folio;
 
       cantidadInsumo := (SELECT stocksistema FROM insumo WHERE sku = NEW.sku);
       cantidadEntrada := (SELECT cantidad FROM entrada WHERE folio = NEW.folio);

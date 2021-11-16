@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Button } from "react-bootstrap";
+import EditarCliente from './EditarCliente';
 import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
@@ -33,7 +34,6 @@ const RevisarYBuscar = () => {
 
     console.log(clientes);
 
-
     return (
         <>
             <Button onClick={getClientes}>Refrescar</Button>
@@ -47,8 +47,7 @@ const RevisarYBuscar = () => {
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
                         <th>RFC</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,8 +60,16 @@ const RevisarYBuscar = () => {
                             <td>{cliente.apellidopaterno}</td>
                             <td>{cliente.apellidomaterno}</td>
                             <td>{cliente.rfc}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarCliente cliente={cliente}/> */}</td>
-                            <td><Button className="btn btn-danger" onClick={() => borrarCliente(cliente.idcliente)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+
+                            <td className="d-flex justify-content-around align-items-center">
+                                <EditarCliente cliente={cliente} getClientes={getClientes} />
+                                <Button
+                                    className="btn btn-danger"
+                                    onClick={() => borrarCliente(cliente.idcliente)}
+                                >
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
