@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Table, Tabs, Tab, Form, Button, Row, Col } from "react-bootstrap";
+import React, { useState } from 'react'
+import { Form, Button, Row, Col } from "react-bootstrap";
 
 const Clientes = () => {
 
