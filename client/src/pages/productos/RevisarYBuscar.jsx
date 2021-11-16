@@ -70,7 +70,6 @@ const RevisarYBuscar = () => {
                                     <FaIcons.FaTrashAlt className="h-100 w-100" />
                                 </Button>
                             </td>
-
                         </tr>
                     ))}
                 </tbody>

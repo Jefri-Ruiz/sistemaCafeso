@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Table, Button } from "react-bootstrap";
-import * as FaIcons from 'react-icons/fa';
+import EditarInsumo from './EditarInsumo';
+import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
     
@@ -45,8 +46,7 @@ const RevisarYBuscar = () => {
                         <th>Unidad de medida</th>
                         <th>Stock en Sistema</th>
                         <th>Valor del Almacen</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,8 +58,16 @@ const RevisarYBuscar = () => {
                             <td>{insumo.unidadmedida}</td>
                             <td>{insumo.stocksistema}</td>
                             <td>${insumo.valoralmacen}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button></td>
-                            <td><Button className="btn btn-danger" onClick={() => borrarInsumos(insumo.sku)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+
+                            <td className="d-flex justify-content-around align-items-center">
+                                <EditarInsumo insumo={insumo} getInsumos={getInsumos} />
+                                <Button
+                                    className="btn btn-danger"
+                                    onClick={() => borrarInsumos(insumo.sku)}
+                                >
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
