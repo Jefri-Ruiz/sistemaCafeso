@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
-import * as FaIcons from 'react-icons/fa';
+import EditarProducto from './EditarProducto';
+import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
 
@@ -46,8 +47,7 @@ const RevisarYBuscar = () => {
                         <th>Precio Publico</th>
                         <th>Stock Sistema</th>
                         <th>Valor Almacen</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,8 +60,17 @@ const RevisarYBuscar = () => {
                             <td>${producto.preciopublico}</td>
                             <td>{producto.stocksistema}</td>
                             <td>${producto.valoralmacen}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarCliente cliente={cliente}/> */}</td>
-                            <td><Button className="btn btn-danger" onClick={() => borrarProducto(producto.sku)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+
+                            <td className="d-flex justify-content-around align-items-center">
+                                <EditarProducto producto={producto} getProductos={getProductos} />
+                                <Button
+                                    className="btn btn-danger"
+                                    onClick={() => borrarProducto(producto.sku)}
+                                >
+                                    <FaIcons.FaTrashAlt className="h-100 w-100" />
+                                </Button>
+                            </td>
+
                         </tr>
                     ))}
                 </tbody>
