@@ -4,7 +4,7 @@ const pool = require('../db.js');
 //Muestra todos el inventario
 router.get("/", async (req, res) => {
     try {
-        const inventario = await pool.query("SELECT * FROM inventario");
+        const inventario = await pool.query("SELECT idInventario, TO_CHAR(fecha, 'YYYY-MM-DD') AS fecha, hora, sku, descripcion, stockSistema, stockFisico, precioUnitario FROM inventario");
         res.json(inventario.rows);
     } catch (err) {
         console.error(err.message);

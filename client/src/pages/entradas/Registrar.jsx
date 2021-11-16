@@ -42,7 +42,7 @@ const Entradas = () => {
             });
 
             console.log(response);
-          
+            console.log(body);
             setFolio("");
             setSku("");
             setIdProveedor("");

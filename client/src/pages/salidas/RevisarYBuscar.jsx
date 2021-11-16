@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
+import Editar from './Editar';
 
 const RevisarYBuscar = () => {
 
     const [salidas, setSalidas] = useState([]);
     const [buscar, setBuscar] = useState("");
+
+    //Delete function
+    const deleteSalida = async (folio) => {
+        try {
+            const request = await fetch(`http://localhost:5000/salidas/${folio}`, {
+                method: "DELETE"
+            });   
+            console.log(request);
+            setSalidas(salidas.filter(salida => salida.folio !== folio));
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
 
     const getSalidas = async () => {
         try {
@@ -21,9 +35,9 @@ const RevisarYBuscar = () => {
         getSalidas();
     }, [])
 
-    const filtroSalidas = salidas.filter(entrada => (
-        entrada.folio.toUpperCase().includes(buscar.toUpperCase()) ||
-        entrada.fecha.includes(buscar)
+    const filtroSalidas = salidas.filter(salida => (
+        salida.folio.toUpperCase().includes(buscar.toUpperCase()) ||
+        salida.fecha.includes(buscar)
     ));
 
     return (
@@ -75,8 +89,8 @@ const RevisarYBuscar = () => {
                             <td>$ {salida.preciopublico}</td>
                             <td>{salida.descuento} %</td>
                             <td>$ {salida.montototal}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button>{/* <EditarUsuario usuario={usuario}/> */}</td>
-                            <td><Button className="btn btn-danger" /* onClick={borrarUsuario(usuario.matricula)} */><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td><Editar salida = {salida}/></td>
+                            <td><Button className="btn btn-danger" onClick={() => deleteSalida(salida.folio)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
                         </tr>
                     ))}
                 </tbody>
