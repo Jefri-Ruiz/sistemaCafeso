@@ -86,7 +86,7 @@ BEGIN
 END;
 ' LANGUAGE plpgsql;
 --  trigger  --
-create or replace trigger actualizar_Inventario after insert on inventario 
+create trigger actualizar_Inventario after insert or update on inventario 
 for each row execute procedure calculo_inventario();
 
 /* ENTRADA */
@@ -123,7 +123,7 @@ BEGIN
 END;
 ' LANGUAGE plpgsql;
 --  trigger  --
-create or replace trigger actualizar_costoTotalEntrada after insert or update on entrada 
+create trigger actualizar_costoTotalEntrada after insert or update on entrada 
 for each row execute procedure calculo_costoTotalEntrada();
 
 
@@ -160,5 +160,5 @@ BEGIN
 END;
 ' LANGUAGE plpgsql;
 --  trigger  --
-create or replace trigger actualizar_costoTotalSalida after insert or update on salida 
+create trigger actualizar_costoTotalSalida after insert or update on salida 
 for each row execute procedure calculo_costoTotalSalida();

@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
+import Editar from './Editar';
 
 const RevisarYBuscar = () => {
 
     const [entradas, setEntradas] = useState([]);
     const [buscar, setBuscar] = useState("");
 
+    //Delete function
+    const deleteEntrada = async (folio) => {
+        try {
+            const request = await fetch(`http://localhost:5000/entradas/${folio}`, {
+                method: "DELETE"
+            });   
+            console.log(request);
+            setEntradas(entradas.filter(entrada => entrada.folio !== folio));
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    //Get function
     const getEntradas = async () => {
 
         try {
@@ -74,8 +89,8 @@ const RevisarYBuscar = () => {
                             <td>{entrada.cantidad}</td>
                             <td>$ {entrada.costounitario}</td>
                             <td>$ {entrada.costototal}</td>
-                            <td><Button className="btn btn-primary"><FaIcons.FaEdit className="h-100 w-100" /></Button></td>
-                            <td><Button className="btn btn-danger" ><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
+                            <td><Editar entrada = {entrada}/></td>
+                            <td><Button className="btn btn-danger" onClick={() => deleteEntrada(entrada.folio)}><FaIcons.FaTrashAlt className="h-100 w-100" /></Button></td>
                         </tr>
                     ))}
                 </tbody>

@@ -10,7 +10,7 @@ create table Usuario (
 
 --Catalogo proveedor:
 create table Proveedor (
-    idProveedor smallint serial primary key,
+    idProveedor serial primary key,
     razonSocial varchar(100) not null,
     rfc varchar(13) not null unique,
     telefono varchar(10) not null,
