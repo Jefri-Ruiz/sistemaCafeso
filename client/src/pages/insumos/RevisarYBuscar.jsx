@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import EditarInsumo from './EditarInsumo';
 import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
-    
+
     const [insumos, setInsumos] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getInsumos = async () => {
         try {
@@ -31,12 +32,32 @@ const RevisarYBuscar = () => {
     useEffect(() => {
         getInsumos();
     }, [])
+    
+    const filtroInsumos = insumos.filter(insumo => (
+        insumo.descripcion.toUpperCase().includes(buscar.toUpperCase())
+    ));
 
     console.log(insumos);
 
     return (
         <>
-        <Button onClick={getInsumos}>Refrescar</Button>
+            <Form>
+                <Form.Label></Form.Label>
+                <Row className="align-items-center">
+                    <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
+                        <InputGroup className="mb-0">
+                            <InputGroup.Text>Buscar por:</InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Descripcion del insumo"
+                                onChange={e => setBuscar(e.target.value)}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Button as={Col} xs="auto" onClick={getInsumos}>Refrescar</Button>
+                </Row>
+            </Form>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -50,7 +71,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {insumos.map(insumo => (
+                    {filtroInsumos.map(insumo => (
                         <tr key={insumo.sku}>
                             <td>{insumo.sku}</td>
                             <td>{insumo.descripcion}</td>

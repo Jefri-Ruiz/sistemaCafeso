@@ -40,10 +40,11 @@ const Insumos = () => {
                         <Form.Label>SKU</Form.Label>
                         <Form.Control
                             autoComplete="off"
-                            type="text"
+                            type="number"
                             placeholder="Codigo del insumo"
                             value={sku}
                             onChange={e => setSku(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 
@@ -57,6 +58,7 @@ const Insumos = () => {
                                 placeholder="Kilogramos, Piezas..."
                                 value={unidadMedida}
                                 onChange={e => setUnidadMedida(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                         
@@ -66,10 +68,11 @@ const Insumos = () => {
                             <InputGroup.Text>$</InputGroup.Text>        
                             <Form.Control
                                 autoComplete="off"
-                                type="text"
+                                type="number"
                                 placeholder="0"
                                 value={costoUnitario}
                                 onChange={e => setCostoUnitario(e.target.value)}
+                                required={true}
                             />
                             </InputGroup>
                         </Form.Group>
@@ -78,10 +81,11 @@ const Insumos = () => {
                             <Form.Label>Cantidad</Form.Label>
                             <Form.Control
                                 autoComplete="off"
-                                type="text"
+                                type="number"
                                 placeholder="0"
                                 value={stockSistema}
                                 onChange={e => setStockSistema(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
 
@@ -91,7 +95,7 @@ const Insumos = () => {
                             <InputGroup.Text>$</InputGroup.Text> 
                             <Form.Control
                                 autoComplete="off"
-                                type="text"
+                                type="number"
                                 placeholder="0"
                                 value={costoUnitario * stockSistema}
                                 onChange={() => { return costoUnitario * stockSistema }}
@@ -111,6 +115,7 @@ const Insumos = () => {
                             rows={3}
                             value={descripcion}
                             onChange={e => setDescripcion(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 
