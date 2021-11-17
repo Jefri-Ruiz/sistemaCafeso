@@ -19,7 +19,7 @@ const EditarProveedor = ({ proveedor, getProveedores }) => {
         e.preventDefault();
         try {
             const body = { razonSocial, rfc, telefono, correo, direccion };
-            await fetch(`http://localhost:5000/proveedores/${proveedor.idProveedor}`,
+            await fetch(`http://localhost:5000/proveedores/${proveedor.idproveedor}`,
                 {
                     method: "PUT",
                     headers: { "Content-type": "application/json" },

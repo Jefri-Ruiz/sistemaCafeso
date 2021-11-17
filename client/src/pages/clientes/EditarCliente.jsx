@@ -20,7 +20,7 @@ const EditarCliente = ({ cliente, getClientes }) => {
         e.preventDefault();
         try {
             const body = { telefono, correo, nombre, apellidoPaterno, apellidoMaterno, rfc };
-            await fetch(`http://localhost:5000/clientes/${cliente.idCliente}`,
+            await fetch(`http://localhost:5000/clientes/${cliente.idcliente}`,
                 {
                     method: "PUT",
                     headers: { "Content-type": "application/json" },

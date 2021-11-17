@@ -33,8 +33,8 @@ router.get("/:idProveedor", async (req, res) => {
 router.put("/:idProveedor", async (req, res) => {
     try {
         const { idProveedor } = req.params;
-        const { razonSocial } = req.body;
-        const actualiza = await pool.query("UPDATE proveedor SET razonSocial = $1 WHERE idProveedor = $2", [idProveedor, razonSocial]);
+        const { razonSocial, rfc, telefono, correo, direccion } = req.body;
+        const actualiza = await pool.query("UPDATE proveedor SET razonSocial = $1, rfc = $2, telefono = $3, correo = $4, direccion = $5 WHERE idProveedor = $6", [razonSocial, rfc, telefono, correo, direccion, idProveedor]);
         res.json("proveedor ha sido actualizado");
     } catch (err) {
         console.error(err.message);

@@ -33,8 +33,8 @@ router.get("/:sku", async(req, res) =>{
 router.put("/:sku", async(req, res) =>{
     try {
         const {sku} = req.params;
-        const {descripcion} = req.body;
-        const actualiza = await pool.query("UPDATE producto SET sku = $1 WHERE descripcion= $2", [sku, descripcion]);
+        const {descripcion, precioUnitario, stockSistema} = req.body;
+        const actualiza = await pool.query("UPDATE producto SET descripcion = $1, precioUnitario = $2, stockSistema = $3 WHERE sku = $4", [descripcion, precioUnitario, stockSistema, sku]);
         res.json("Cliente ha sido actualizado");
     } catch (err) {
         console.error(err.message);
