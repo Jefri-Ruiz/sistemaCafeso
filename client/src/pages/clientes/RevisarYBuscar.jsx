@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button, Form, Row, Col, InputGroup} from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import EditarCliente from './EditarCliente';
 import * as FaIcons from 'react-icons/fa'
 
@@ -41,7 +41,7 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-                <Form>
+            <Form>
                 <Form.Label></Form.Label>
                 <Row className="align-items-center">
 
