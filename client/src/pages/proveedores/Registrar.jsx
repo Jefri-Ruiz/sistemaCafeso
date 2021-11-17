@@ -44,6 +44,7 @@ const Proveedores = () => {
                             placeholder="Ejemplo S.A. de C.V."
                             value={razonSocial}
                             onChange={e => setRazonSocial(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 
@@ -56,6 +57,8 @@ const Proveedores = () => {
                                 placeholder="3JEMPL0"
                                 value={rfc}
                                 onChange={e => setRfc(e.target.value)}
+                                pattern="^[A-Z]{2,3}{3}[0-9]{6}[A-Z0-9]{3}+$"
+                                required={true}
                             />
                         </Form.Group>
 
@@ -67,6 +70,8 @@ const Proveedores = () => {
                                 placeholder="123456789"
                                 value={telefono}
                                 onChange={e => setTelefono(e.target.value)}
+                                pattern="[0-9]{10}$"
+                                required={true}
                             />
                         </Form.Group>
 
@@ -78,6 +83,8 @@ const Proveedores = () => {
                                 placeholder="nombre@ejemplo.com"
                                 value={correo}
                                 onChange={e => setCorreo(e.target.value)}
+                                pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$"
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -92,6 +99,7 @@ const Proveedores = () => {
                             rows={3}
                             value={direccion}
                             onChange={e => setDireccion(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 

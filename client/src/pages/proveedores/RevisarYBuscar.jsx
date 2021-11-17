@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Col, Row, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import EditarProveedor from './EditarProveedor';
 
 const RevisarYBuscar = () => {
 
     const [proveedores, setProveedores] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getProveedores = async () => {
         try {
@@ -32,11 +33,49 @@ const RevisarYBuscar = () => {
         getProveedores();
     }, [])
 
+    const filtroProveedores = proveedores.filter(proveedor => (
+        proveedor.razonsocial.toUpperCase().includes(buscar.toUpperCase())
+    ));
+
     console.log(proveedores);
 
     return (
         <>
-            <Button onClick={getProveedores}>Refrescar</Button>
+
+            <Form>
+                <Form.Label></Form.Label>
+                <Row className="align-items-center">
+
+                    <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
+                        <InputGroup className="mb-0">
+                            <InputGroup.Text>Buscar por:</InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Razon Social"
+                                onChange={e => setBuscar(e.target.value)}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <Button as={Col} xs="auto" onClick={getProveedores}>Refrescar</Button>
+
+
+                </Row>
+            </Form>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -50,7 +89,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {proveedores.map(proveedor => (
+                    {filtroProveedores.map(proveedor => (
                         <tr key={proveedor.idproveedor}>
                             <td>{proveedor.idproveedor}</td>
                             <td>{proveedor.razonsocial}</td>
