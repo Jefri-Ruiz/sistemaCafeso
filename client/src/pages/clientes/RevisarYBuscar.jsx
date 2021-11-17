@@ -67,12 +67,12 @@ const RevisarYBuscar = () => {
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Telefono</th>
-                        <th>Correo</th>
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
                         <th>RFC</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -80,12 +80,12 @@ const RevisarYBuscar = () => {
                     {filtroClientes.map(cliente => (
                         <tr key={cliente.idcliente}>
                             <td>{cliente.idcliente}</td>
-                            <td>{cliente.telefono}</td>
-                            <td>{cliente.correo}</td>
                             <td>{cliente.nombre}</td>
                             <td>{cliente.apellidopaterno}</td>
                             <td>{cliente.apellidomaterno}</td>
                             <td>{cliente.rfc}</td>
+                            <td>{cliente.telefono}</td>
+                            <td>{cliente.correo}</td>
 
                             <td className="d-flex justify-content-around align-items-center">
                                 <EditarCliente cliente={cliente} getClientes={getClientes} />
