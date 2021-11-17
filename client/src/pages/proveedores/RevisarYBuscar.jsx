@@ -56,23 +56,7 @@ const RevisarYBuscar = () => {
                             />
                         </InputGroup>
                     </Form.Group>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <Button as={Col} xs="auto" onClick={getProveedores}>Refrescar</Button>
-
-
                 </Row>
             </Form>
 
