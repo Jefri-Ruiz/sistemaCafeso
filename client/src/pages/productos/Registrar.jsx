@@ -42,10 +42,11 @@ const Productos = () => {
                             <Form.Label>SKU</Form.Label>
                             <Form.Control
                                 autoComplete="off"
-                                type="text"
+                                type="number"
                                 placeholder="Codigo del producto"
                                 value={sku}
                                 onChange={e => setSku(e.target.value)}
+                                required={true}
                             />
 
                         </Form.Group>
@@ -54,10 +55,11 @@ const Productos = () => {
                             <Form.Label>Stock</Form.Label>
                             <Form.Control
                                 autoComplete="off"
-                                type="text"
+                                type="number"
                                 placeholder="Cantidad"
                                 value={stockSistema}
                                 onChange={e => setStockSistema(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -69,10 +71,12 @@ const Productos = () => {
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control
                                     autoComplete="off"
-                                    type="text"
+                                    type="number"
                                     placeholder="Precio"
                                     value={precioUnitario}
                                     onChange={e => setPrecioUnitario(e.target.value)}
+                                    pattern="[0-9]{10}$"
+                                    required={true}
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -124,6 +128,7 @@ const Productos = () => {
                             placeholder="Descripcion"
                             value={descripcion}
                             onChange={e => setDescripcion(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 

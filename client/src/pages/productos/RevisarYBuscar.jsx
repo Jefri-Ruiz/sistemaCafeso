@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import EditarProducto from './EditarProducto';
 import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
 
     const [productos, setProductos] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getProductos = async () => {
         try {
@@ -32,11 +33,31 @@ const RevisarYBuscar = () => {
         getProductos();
     }, [])
 
+    const filtroProductos = productos.filter(producto => (
+        producto.descripcion.toUpperCase().includes(buscar.toUpperCase())
+    ));
+
     console.log(productos);
 
     return (
         <>
-            <Button onClick={getProductos}>Refrescar</Button>
+            <Form>
+                <Form.Label></Form.Label>
+                <Row className="align-items-center">
+                    <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
+                        <InputGroup className="mb-0">
+                            <InputGroup.Text>Buscar por:</InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Descripcion del producto"
+                                onChange={e => setBuscar(e.target.value)}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Button as={Col} xs="auto" onClick={getProductos}>Refrescar</Button>
+                </Row>
+            </Form>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -51,7 +72,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productos.map(producto => (
+                    {filtroProductos.map(producto => (
                         <tr key={producto.sku}>
                             <td>{producto.sku}</td>
                             <td>{producto.descripcion}</td>

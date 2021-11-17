@@ -44,7 +44,6 @@ const RevisarYBuscar = () => {
             <Form>
                 <Form.Label></Form.Label>
                 <Row className="align-items-center">
-
                     <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
                         <InputGroup className="mb-0">
                             <InputGroup.Text>Buscar por:</InputGroup.Text>
@@ -58,10 +57,6 @@ const RevisarYBuscar = () => {
                     <Button as={Col} xs="auto" onClick={getClientes}>Refrescar</Button>
                 </Row>
             </Form>
-
-
-
-
 
             <Table striped bordered hover>
                 <thead>
