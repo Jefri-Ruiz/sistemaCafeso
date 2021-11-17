@@ -46,6 +46,7 @@ const Clientes = () => {
                             placeholder="Nombre"
                             value={nombre}
                             onChange={e => setNombre(e.target.value)}
+                            required={true}
                         />
                     </Form.Group>
 
@@ -58,6 +59,7 @@ const Clientes = () => {
                                 placeholder="Apellido Paterno"
                                 value={apellidoPaterno}
                                 onChange={e => setApellidoPaterno(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
 
@@ -69,6 +71,7 @@ const Clientes = () => {
                                 placeholder="Apellido Materno"
                                 value={apellidoMaterno}
                                 onChange={e => setApellidoMaterno(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -93,6 +96,8 @@ const Clientes = () => {
                                 placeholder="Telefono"
                                 value={telefono}
                                 onChange={e => setTelefono(e.target.value)}
+                                pattern="[0-9]{10}$"
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -105,6 +110,8 @@ const Clientes = () => {
                             placeholder="nombre@ejemplo.com"
                             value={correo}
                             onChange={e => setCorreo(e.target.value)}
+                            pattern="^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$"
+                            required={true}
                         />
                     </Form.Group>
 

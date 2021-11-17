@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup} from "react-bootstrap";
 import EditarCliente from './EditarCliente';
 import * as FaIcons from 'react-icons/fa'
 
 const RevisarYBuscar = () => {
 
     const [clientes, setClientes] = useState([]);
+    const [buscar, setBuscar] = useState("");
 
     const getClientes = async () => {
         try {
@@ -32,11 +33,36 @@ const RevisarYBuscar = () => {
         getClientes();
     }, [])
 
+    const filtroClientes = clientes.filter(cliente => (
+        cliente.nombre.toUpperCase().includes(buscar.toUpperCase())
+    ));
+
     console.log(clientes);
 
     return (
         <>
-            <Button onClick={getClientes}>Refrescar</Button>
+                <Form>
+                <Form.Label></Form.Label>
+                <Row className="align-items-center">
+
+                    <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
+                        <InputGroup className="mb-0">
+                            <InputGroup.Text>Buscar por:</InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Nombre de la persona"
+                                onChange={e => setBuscar(e.target.value)}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Button as={Col} xs="auto" onClick={getClientes}>Refrescar</Button>
+                </Row>
+            </Form>
+
+
+
+
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -51,7 +77,7 @@ const RevisarYBuscar = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {clientes.map(cliente => (
+                    {filtroClientes.map(cliente => (
                         <tr key={cliente.idcliente}>
                             <td>{cliente.idcliente}</td>
                             <td>{cliente.telefono}</td>
