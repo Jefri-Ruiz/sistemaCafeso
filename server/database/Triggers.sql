@@ -1,3 +1,4 @@
+
 /* PRODUCTO */
 --  funcion  --
 CREATE OR REPLACE FUNCTION calculo_valoresProducto() RETURNS trigger AS
@@ -161,4 +162,5 @@ END;
 ' LANGUAGE plpgsql;
 --  trigger  --
 create trigger actualizar_costoTotalSalida after insert or update on salida 
+
 for each row execute procedure calculo_costoTotalSalida();
