@@ -17,8 +17,8 @@ router.get("/", async(req, res) => {
 //Crear nuevo usuario funciona
 router.post("/", async(req, res) =>{
     try {
-        const {password, nombre, apellidopaterno, apellidomaterno} = req.body;
-        const newUsuario = await pool.query("INSERT INTO usuario (password, nombre, apellidopaterno, apellidomaterno ) values ($1, $2, $3, $4) RETURNING *",[password, nombre, apellidopaterno, apellidomaterno] );
+        const {password, tipousuario, nombre, apellidopaterno, apellidomaterno} = req.body;
+        const newUsuario = await pool.query("INSERT INTO usuario (password, tipousuario, nombre, apellidopaterno, apellidomaterno ) values ($1, $2, $3, $4, $5) RETURNING *",[password, tipousuario, nombre, apellidopaterno, apellidomaterno] );
         res.json(newUsuario.rows[0]);
         
     } catch (err) {
@@ -43,8 +43,8 @@ router.get("/:matricula", async(req, res) =>{
 router.put("/:matricula", async(req, res) =>{
     try {
         const {matricula} = req.params;
-        const {nombre, apellidopaterno, apellidomaterno, password} = req.body;
-        const actualiza = await pool.query("UPDATE usuario SET nombre = $1, apellidopaterno = $2, apellidomaterno= $3, password= $4 WHERE matricula = $5", [ nombre, apellidopaterno, apellidomaterno, password, matricula]);
+        const {tipousuario, nombre, apellidopaterno, apellidomaterno, password} = req.body;
+        const actualiza = await pool.query("UPDATE usuario SET tipousuario = $1, nombre = $2, apellidopaterno = $3, apellidomaterno= $4, password= $5 WHERE matricula = $6", [  tipousuario, nombre, apellidopaterno, apellidomaterno, password, matricula]);
         res.json("usuario ha sido actualizado");
     } catch (err) {
         console.error(err.message);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa'
 
 const EditarUsuario = ({usuario, getUsuarios}) => {
@@ -9,6 +9,7 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
     const [apellidopaterno, setApellidopaterno] = useState(usuario.apellidopaterno);
     const [apellidomaterno, setApellidomaterno] = useState(usuario.apellidomaterno);
     const [password, setPassword] = useState(usuario.password);
+    const [tipousuario, setTipousuario] = useState(usuario.tipousuario);
 
     /* Prueba para ver si se podia realizar lo de arriba con un solo un useState 
     const [dato, setDato] = useState([
@@ -41,7 +42,7 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
     const updateUsuario = async (e) =>{
         e.preventDefault();
         try {
-            const body = {nombre, apellidopaterno, apellidomaterno, password};
+            const body = {tipousuario, nombre, apellidopaterno, apellidomaterno, password};
             /* const respuesta =  */await fetch(`http://localhost:5000/usuarios/${usuario.matricula}`,
             {
                 method: "PUT",
@@ -74,7 +75,8 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
                 onClick={()=> setNombre(usuario.nombre) && 
                     setApellidopaterno(usuario.apellidopaterno) && 
                     setApellidomaterno(usuario.apellidomaterno) &&
-                    setPassword(usuario.password)
+                    setPassword(usuario.password) &&
+                    setTipousuario(usuario.tipousuario)
                 }
                 /* [
                     usuario.nombre,
@@ -124,6 +126,21 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
                                     onChange={ e => setPassword(e.target.value) }
                                 />
                             </div>
+
+                            <div className="mb-2">
+                                <label className="mb-1">Tipo de usuario</label>
+                                <Form.Select 
+                                    aria-label="Usuario tipo"
+                                    value={tipousuario}
+                                    onChange={e => setTipousuario(e.target.value)}
+                                    >
+                                    <option value="Colaborador">Colaborador</option>
+                                    <option value="Administrador">Administrador</option>
+                                </Form.Select>
+
+                            </div>
+
+
                             
                         </Modal.Body>
 

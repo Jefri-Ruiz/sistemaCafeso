@@ -59,10 +59,11 @@ const ListarUsuarios = () => {
         <thead>
           <tr>
             <th>Matricula</th>
-            <th>Password</th>
+            <th>Tipo de usuario</th>
             <th>Nombre</th>
             <th>Apellido paterno</th>
             <th>Apellido materno</th>
+            <th>Password</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -70,10 +71,11 @@ const ListarUsuarios = () => {
           {usuarios.map((usuario) => (
             <tr key={usuario.matricula}>
               <td>{usuario.matricula}</td>
-              <td>{usuario.password}</td>
+              <td>{usuario.tipousuario}</td>
               <td>{usuario.nombre}</td>
               <td>{usuario.apellidopaterno}</td>
               <td>{usuario.apellidomaterno}</td>
+              <td>{usuario.password}</td>
 
               <td className="d-flex justify-content-around align-items-center">
                 <EditarUsuario usuario={usuario} getUsuarios={getUsuarios}/>

@@ -21,12 +21,13 @@ const RegistrarUsuarios = () => {
   const [nombre, setNombre] = useState("");
   const [apellidopaterno, setApellidopaterno] = useState("");
   const [apellidomaterno, setApellidomaterno] = useState("");
+  const [tipousuario, setTipousuario] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       /* console.log(datos); */
-      const body = { password, nombre, apellidopaterno, apellidomaterno };
+      const body = { password, nombre, apellidopaterno, apellidomaterno, tipousuario };
       const response = await fetch("http://localhost:5000/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,6 +39,7 @@ const RegistrarUsuarios = () => {
       setApellidopaterno("");
       setApellidomaterno("");
       setPassword("");
+      setTipousuario("");
 
       console.log(response);
     } catch (err) {
@@ -84,7 +86,7 @@ const RegistrarUsuarios = () => {
 
           </Row>
 
-          <Row className="align-items-center justify-center">
+          <Row className="align-items-center">
             
           <Form.Group as={Col} className="mb-4" controlId="formMaterno">
           <Form.Label>Apellido materno</Form.Label>
@@ -98,8 +100,23 @@ const RegistrarUsuarios = () => {
               onChange={(e) => setApellidomaterno(e.target.value)}
             />
           </Form.Group>
-
+          
           <Form.Group as={Col} className="mb-4" controlId="formPass">
+            <Form.Label>Tipo de usuario</Form.Label>
+            <Form.Select 
+              aria-label="Usuario tipo"
+              required= {true}
+              value={tipousuario}
+              onChange={(e) => setTipousuario(e.target.value)}
+              >
+              <option value="Colaborador">Colaborador</option>
+              <option value="Administrador">Administrador</option>
+            </Form.Select>
+          </Form.Group>
+
+          </Row>
+
+          <Form.Group className="mb-4" controlId="formPass">
           <Form.Label>Contraseña</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -110,11 +127,11 @@ const RegistrarUsuarios = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {/* <Form.Text className="text-muted">
+            <Form.Text className="text-muted">
               Asegurese ingresar una contraseña con minimo cinco caracteres
-            </Form.Text> */}
+            </Form.Text>
           </Form.Group>
-          </Row>
+
 
           <br />
 
