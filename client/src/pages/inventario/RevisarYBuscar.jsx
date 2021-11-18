@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Form, Row, Col } from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
 
 
 const RevisarYBuscar = () => {
-    
-    
-      
+
+
+
     const [inventario, setInventario] = useState([]);
     const [buscar, setBuscar] = useState("");
 
@@ -44,19 +44,27 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-            <div className="entradas__nav" >
-                <Button variant="primary" onClick={getInventario}>Refrescar</Button>
+            <div className="inventario__nav" >
+
+
+                <Form>
+                    <Row className="align-items-center">
+                        <Col className="mb-3">
+                            <Form.Group controlId="formBuscar">
+                                <InputGroup className="mb-0">
+                                    <InputGroup.Text>Buscar por fecha:</InputGroup.Text>
+                                    <Form.Control type="date"
+                                        onChange={e => setBuscar(e.target.value)}>
+                                    </Form.Control>
+                                </InputGroup>
+                            </Form.Group>
+                        </Col>
+                        <Col className="mb-3">
+                            <Button variant="primary" onClick={getInventario}>Refrescar</Button>
+                        </Col>
+                    </Row>
+                </Form>
             </div>
-            <Form>
-                <Row className="align-items-center">
-                    <Col className="mb-3">
-                        <Form.Label>Buscar por fecha...</Form.Label>
-                        <Form.Group controlId="formBuscar">
-                            <Form.Control type="date" onChange={e => setBuscar(e.target.value)}></Form.Control>
-                        </Form.Group>
-                    </Col>
-                </Row>
-            </Form>
             <Table striped bordered hover>
                 <thead>
                     <tr>

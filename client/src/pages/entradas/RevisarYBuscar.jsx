@@ -44,35 +44,36 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-
-            <Form>
-                <Row className="align-items-center">
-                    <Col className="mb-3">
-                        <Form.Group controlId="formBuscar">
-                            <InputGroup className="mb-0">
-                                <InputGroup.Text>Buscar por:</InputGroup.Text>
-                                <Form.Control type="text"
-                                    placeholder="E001"
-                                    onChange={e => setBuscar(e.target.value)}>
-                                </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                    <Col className="mb-3">
-                        <Form.Group controlId="formBuscar">
-                            <InputGroup className="mb-0">
-                                <InputGroup.Text>Buscar por:</InputGroup.Text>
-                                <Form.Control type="date"
-                                    onChange={e => setBuscar(e.target.value)}>
-                                </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                    </Col>
-                    <Col className="mb-3">
-                        <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
-                    </Col>
-                </Row>
-            </Form>
+            <div className="entradas__nav">
+                <Form>
+                    <Row className="align-items-center">
+                        <Col className="mb-3">
+                            <Form.Group controlId="formBuscar">
+                                <InputGroup className="mb-0">
+                                    <InputGroup.Text>Buscar por:</InputGroup.Text>
+                                    <Form.Control type="text"
+                                        placeholder="Folio"
+                                        onChange={e => setBuscar(e.target.value)}>
+                                    </Form.Control>
+                                </InputGroup>
+                            </Form.Group>
+                        </Col>
+                        <Col className="mb-3">
+                            <Form.Group controlId="formBuscar">
+                                <InputGroup className="mb-0">
+                                    <InputGroup.Text>Buscar por fecha:</InputGroup.Text>
+                                    <Form.Control type="date"
+                                        onChange={e => setBuscar(e.target.value)}>
+                                    </Form.Control>
+                                </InputGroup>
+                            </Form.Group>
+                        </Col>
+                        <Col className="mb-3">
+                            <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </div>
             <Table striped bordered hover>
                 <thead>
                     <tr>
