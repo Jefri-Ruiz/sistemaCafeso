@@ -1,7 +1,9 @@
+
 --USUARIO
 insert into Usuario values (DEFAULT,'Administrador', 'unach', 'john', 'de leon', 'faugier');
 insert into Usuario values (DEFAULT,'Administrador', 'unach', 'jefri', 'ruiz', 'espinoza');
 insert into Usuario values (DEFAULT,'Colaborador', 'unach', 'juan', 'barrientos', 'mazariegos');
+
 
 --PROVEEDOR
 insert into Proveedor values (DEFAULT, 'cafe tacana sa de cv', 'XAXX010101000', '9621234567', 'ventas@cafetacana.com', 'Carretera nueva alemania km 3');

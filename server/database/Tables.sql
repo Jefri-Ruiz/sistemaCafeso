@@ -2,7 +2,9 @@ create database cafeso;
 
 create table Usuario (
     matricula serial primary key,
+
     tipoUsuario varchar (15) not null check (tipoUsuario = 'Administrador' OR tipoUsuario = 'Colaborador'),
+
     password varchar(50) not null,
     nombre varchar(50) not null,
     apellidoPaterno varchar(50) not null,
@@ -83,3 +85,4 @@ create table Salida (
     descuento numeric(3) not null check(descuento >= 0 and descuento <= 100),
     montoTotal numeric(10,2)
 );
+

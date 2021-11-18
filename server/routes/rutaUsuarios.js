@@ -43,8 +43,10 @@ router.get("/:matricula", async(req, res) =>{
 router.put("/:matricula", async(req, res) =>{
     try {
         const {matricula} = req.params;
+
         const {tipousuario, nombre, apellidopaterno, apellidomaterno, password} = req.body;
         const actualiza = await pool.query("UPDATE usuario SET tipousuario = $1, nombre = $2, apellidopaterno = $3, apellidomaterno= $4, password= $5 WHERE matricula = $6", [  tipousuario, nombre, apellidopaterno, apellidomaterno, password, matricula]);
+
         res.json("usuario ha sido actualizado");
     } catch (err) {
         console.error(err.message);

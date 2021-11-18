@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { Form, Button, Col, Row } from "react-bootstrap";
 
 const RegistrarUsuarios = () => {
@@ -54,10 +55,11 @@ const RegistrarUsuarios = () => {
           <h2>Ingrese aquí la información</h2>
         </div> */}
         <Form onSubmit={onSubmitForm}>
-          
+
           <Row className="align-items-center">
 
           <Form.Group as={Col} className="mb-4" controlId="formNombre">
+
           <Form.Label>Nombre</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -70,7 +72,7 @@ const RegistrarUsuarios = () => {
               onChange={(e) => setNombre(e.target.value)}
             />
           </Form.Group>
-          
+
           <Form.Group as={Col} className="mb-4" controlId="formPaterno">
           <Form.Label>Apellido paterno</Form.Label>
             <Form.Control
@@ -84,11 +86,13 @@ const RegistrarUsuarios = () => {
             />
           </Form.Group>
 
+
           </Row>
 
           <Row className="align-items-center">
             
           <Form.Group as={Col} className="mb-4" controlId="formMaterno">
+
           <Form.Label>Apellido materno</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -116,7 +120,9 @@ const RegistrarUsuarios = () => {
 
           </Row>
 
+
           <Form.Group className="mb-4" controlId="formPass">
+
           <Form.Label>Contraseña</Form.Label>
             <Form.Control
               autoComplete="off"

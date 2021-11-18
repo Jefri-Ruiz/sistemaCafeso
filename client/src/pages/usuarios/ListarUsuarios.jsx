@@ -59,6 +59,7 @@ const ListarUsuarios = () => {
         <thead>
           <tr>
             <th>Matricula</th>
+
             <th>Tipo de usuario</th>
             <th>Nombre</th>
             <th>Apellido paterno</th>
@@ -76,6 +77,7 @@ const ListarUsuarios = () => {
               <td>{usuario.apellidopaterno}</td>
               <td>{usuario.apellidomaterno}</td>
               <td>{usuario.password}</td>
+
 
               <td className="d-flex justify-content-around align-items-center">
                 <EditarUsuario usuario={usuario} getUsuarios={getUsuarios}/>

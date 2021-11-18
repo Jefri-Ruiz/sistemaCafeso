@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+
 import { Button, Modal, Form } from "react-bootstrap";
+
 import * as FaIcons from 'react-icons/fa'
 
 const EditarUsuario = ({usuario, getUsuarios}) => {
@@ -9,7 +11,9 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
     const [apellidopaterno, setApellidopaterno] = useState(usuario.apellidopaterno);
     const [apellidomaterno, setApellidomaterno] = useState(usuario.apellidomaterno);
     const [password, setPassword] = useState(usuario.password);
+
     const [tipousuario, setTipousuario] = useState(usuario.tipousuario);
+
 
     /* Prueba para ver si se podia realizar lo de arriba con un solo un useState 
     const [dato, setDato] = useState([
@@ -42,7 +46,9 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
     const updateUsuario = async (e) =>{
         e.preventDefault();
         try {
+
             const body = {tipousuario, nombre, apellidopaterno, apellidomaterno, password};
+
             /* const respuesta =  */await fetch(`http://localhost:5000/usuarios/${usuario.matricula}`,
             {
                 method: "PUT",
@@ -70,6 +76,7 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
                 show={show} 
                 onHide={handleClose}
                 backdrop="static"
+
                 keyboard={false}
                 id={`matricula${usuario.matricula}`}
                 onClick={()=> setNombre(usuario.nombre) && 
@@ -77,6 +84,7 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
                     setApellidomaterno(usuario.apellidomaterno) &&
                     setPassword(usuario.password) &&
                     setTipousuario(usuario.tipousuario)
+
                 }
                 /* [
                     usuario.nombre,
@@ -139,7 +147,6 @@ const EditarUsuario = ({usuario, getUsuarios}) => {
                                 </Form.Select>
 
                             </div>
-
 
                             
                         </Modal.Body>
