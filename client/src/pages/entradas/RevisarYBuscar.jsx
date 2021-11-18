@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Form, Row, Col } from "react-bootstrap";
+import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
 
@@ -44,22 +44,32 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-            <div className="entradas__nav" >
-                <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
-            </div>
+
             <Form>
                 <Row className="align-items-center">
                     <Col className="mb-3">
-                        <Form.Label>Buscar por Folio</Form.Label>
                         <Form.Group controlId="formBuscar">
-                            <Form.Control type="text" placeholder="E001" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                            <InputGroup className="mb-0">
+                                <InputGroup.Text>Buscar por:</InputGroup.Text>
+                                <Form.Control type="text"
+                                    placeholder="E001"
+                                    onChange={e => setBuscar(e.target.value)}>
+                                </Form.Control>
+                            </InputGroup>
                         </Form.Group>
                     </Col>
                     <Col className="mb-3">
-                        <Form.Label>Buscar por fecha...</Form.Label>
                         <Form.Group controlId="formBuscar">
-                            <Form.Control type="date" onChange={e => setBuscar(e.target.value)}></Form.Control>
+                            <InputGroup className="mb-0">
+                                <InputGroup.Text>Buscar por:</InputGroup.Text>
+                                <Form.Control type="date"
+                                    onChange={e => setBuscar(e.target.value)}>
+                                </Form.Control>
+                            </InputGroup>
                         </Form.Group>
+                    </Col>
+                    <Col className="mb-3">
+                        <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
                     </Col>
                 </Row>
             </Form>

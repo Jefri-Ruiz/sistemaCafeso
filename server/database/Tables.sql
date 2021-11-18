@@ -2,7 +2,7 @@ create database cafeso;
 
 create table Usuario (
     matricula serial primary key,
-    tipoUsuario varchar (15) not null check (tipoUsuario = 'Administrador' OR tipoUsuario = 'Colaborador'),
+    tipoUsuario varchar(15) not null check (tipoUsuario = 'Administrador' OR tipoUsuario = 'Colaborador'),
     password varchar(50) not null,
     nombre varchar(50) not null,
     apellidoPaterno varchar(50) not null,

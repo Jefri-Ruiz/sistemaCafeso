@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
-
 import './entradas.scss'
 import RevisarYBuscar from "./RevisarYBuscar";
 import Registrar from "./Registrar";
@@ -8,7 +7,7 @@ import Registrar from "./Registrar";
 const Entradas = () => {
 
   const [key, setKey] = useState('Registrar');
-
+  
   return (
     <>
       <div className="entradas">

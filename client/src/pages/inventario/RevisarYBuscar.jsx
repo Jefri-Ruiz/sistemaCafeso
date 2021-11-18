@@ -3,8 +3,11 @@ import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
 
-const RevisarYBuscar = () => {
 
+const RevisarYBuscar = () => {
+    
+    
+      
     const [inventario, setInventario] = useState([]);
     const [buscar, setBuscar] = useState("");
 
