@@ -7,14 +7,15 @@ const Productos = () => {
     const [descripcion, setDescripcion] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
     const [stockSistema, setStockSistema] = useState('');
-    const precioIva = precioUnitario * 0.16;
+    const [iva, setIva] = useState('');
 
-    var precioPublico = parseFloat(precioUnitario) + parseFloat(precioIva);
+    //const precioIva = precioUnitario * 0.16;
+    //const precioPublico = parseFloat(precioUnitario) + parseFloat(precioIva);
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { sku, descripcion, precioUnitario, stockSistema };
+            const body = { sku, descripcion, precioUnitario, stockSistema, iva };
             const respuesta = await fetch("http://localhost:5000/productos", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
@@ -27,6 +28,7 @@ const Productos = () => {
             setDescripcion("");
             setPrecioUnitario("");
             setStockSistema("");
+            setIva("");
         } catch (err) {
             console.error(err.message);
         }
@@ -87,6 +89,8 @@ const Productos = () => {
                                 <Form.Control
                                     type="number"
                                     placeholder="16"
+                                    value={iva}
+                                    onChange={e => setIva(e.target.value)}
                                 />
                                 <InputGroup.Text>%</InputGroup.Text>
                             </InputGroup>
@@ -99,8 +103,8 @@ const Productos = () => {
                                 <Form.Control
                                     placeholder="Precio al Cliente"
                                     type="number"
-                                    value={precioPublico}
-                                    onChange={() => { return precioPublico }}
+                                   value={precioUnitario+precioUnitario}
+                                    onChange={() => { return (precioUnitario + ((precioUnitario * iva)/100)) }}
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -112,8 +116,8 @@ const Productos = () => {
                                 <Form.Control
                                     type="number"
                                     placeholder="Costo real de Almacen"
-                                    value={precioPublico * stockSistema}
-                                    onChange={() => { return precioPublico * stockSistema }}
+                                  // value={precioPublico * stockSistema}
+                                  // onChange={() => {  precioPublico * stockSistema }}
                                 />
                             </InputGroup>
                         </Form.Group>
