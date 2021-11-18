@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+
+import { Form, Button, Col, Row } from "react-bootstrap";
 
 const RegistrarUsuarios = () => {
   /*   const [datos, setDatos] = useState({
@@ -21,12 +22,13 @@ const RegistrarUsuarios = () => {
   const [nombre, setNombre] = useState("");
   const [apellidopaterno, setApellidopaterno] = useState("");
   const [apellidomaterno, setApellidomaterno] = useState("");
+  const [tipousuario, setTipousuario] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       /* console.log(datos); */
-      const body = { password, nombre, apellidopaterno, apellidomaterno };
+      const body = { password, nombre, apellidopaterno, apellidomaterno, tipousuario };
       const response = await fetch("http://localhost:5000/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,6 +40,7 @@ const RegistrarUsuarios = () => {
       setApellidopaterno("");
       setApellidomaterno("");
       setPassword("");
+      setTipousuario("");
 
       console.log(response);
     } catch (err) {
@@ -52,8 +55,11 @@ const RegistrarUsuarios = () => {
           <h2>Ingrese aquí la información</h2>
         </div> */}
         <Form onSubmit={onSubmitForm}>
-          {/* <Form.Label>Nombre</Form.Label> */}
-          <Form.Group className="mb-4" controlId="formNombre">
+
+          <Row className="align-items-center">
+
+          <Form.Group as={Col} className="mb-4" controlId="formNombre">
+
           <Form.Label>Nombre</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -80,7 +86,13 @@ const RegistrarUsuarios = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formMaterno">
+
+          </Row>
+
+          <Row className="align-items-center">
+            
+          <Form.Group as={Col} className="mb-4" controlId="formMaterno">
+
           <Form.Label>Apellido materno</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -92,8 +104,25 @@ const RegistrarUsuarios = () => {
               onChange={(e) => setApellidomaterno(e.target.value)}
             />
           </Form.Group>
+          
+          <Form.Group as={Col} className="mb-4" controlId="formPass">
+            <Form.Label>Tipo de usuario</Form.Label>
+            <Form.Select 
+              aria-label="Usuario tipo"
+              required= {true}
+              value={tipousuario}
+              onChange={(e) => setTipousuario(e.target.value)}
+              >
+              <option value="Colaborador">Colaborador</option>
+              <option value="Administrador">Administrador</option>
+            </Form.Select>
+          </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formPass">
+          </Row>
+
+
+          <Form.Group className="mb-4" controlId="formPass">
+
           <Form.Label>Contraseña</Form.Label>
             <Form.Control
               autoComplete="off"
@@ -108,6 +137,7 @@ const RegistrarUsuarios = () => {
               Asegurese ingresar una contraseña con minimo cinco caracteres
             </Form.Text>
           </Form.Group>
+
 
           <br />
 
