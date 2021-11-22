@@ -16,7 +16,6 @@ import Config from './pages/configuracion/Config';
 import Entradas from './pages/entradas/Entradas';
 import Salidas from './pages/salidas/Salidas';
 import Inventario from './pages/inventario/Inventario';
-import Reportes from './pages/reportes/Reportes';
 import Usuarios from './pages/usuarios/Usuarios';
 
 
@@ -36,7 +35,6 @@ function App() {
             <Route path="/entradas" exact={true} component={Entradas}/>
             <Route path="/salidas" exact={true} component={Salidas}/>
             <Route path="/inventario" exact={true} component={Inventario}/>
-            <Route path="/reportes" exact={true} component={Reportes}/>
             <Route path="/usuarios" exact={true} component={Usuarios}/>
             <Route path="/configuracion" exact={true} component={Config}/>
             <Route path="/documentacion" exact={true} component={Docs}/>

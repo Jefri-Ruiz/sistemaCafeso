@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
+import { CSVLink } from "react-csv";
+import DocumentPdf from "./reportPdf/DocumentPdf";
+import { PDFDownloadLink } from '@react-pdf/renderer'
 
 const RevisarYBuscar = () => {
 
     const [entradas, setEntradas] = useState([]);
     const [buscar, setBuscar] = useState("");
-
     //Delete function
     const deleteEntrada = async (folio) => {
         try {
@@ -23,7 +25,6 @@ const RevisarYBuscar = () => {
 
     //Get function
     const getEntradas = async () => {
-
         try {
             const response = await fetch("http://localhost:5000/entradas");
             const jsonData = await response.json();
@@ -32,15 +33,14 @@ const RevisarYBuscar = () => {
             console.error(err.message);
         }
     }
-
     useEffect(() => {
         getEntradas();
     }, [])
-
     const filtroEntradas = entradas.filter(entrada => (
         entrada.folio.toUpperCase().includes(buscar.toUpperCase()) ||
         entrada.fecha.includes(buscar)
     ));
+
 
     return (
         <>
@@ -69,11 +69,34 @@ const RevisarYBuscar = () => {
                             </Form.Group>
                         </Col>
                         <Col className="mb-3">
-                            <Button variant="primary" onClick={getEntradas}>Refrescar</Button>
+                            <Button variant="primary" style={{ marginRight: 20 }}
+                                onClick={getEntradas} >
+                                <FaIcons.FaSync className="h-100 w-100" />
+                            </Button>
+
+                            <PDFDownloadLink
+                                document={<DocumentPdf entradas={filtroEntradas} />}
+                                filename="eentradas.pdf"
+                            >
+                                <Button variant="secondary" style={{ marginRight: 20 }}>
+                                    PDF  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </PDFDownloadLink>
+
+                            <CSVLink
+                                data={filtroEntradas}
+                                filename={"entradas.csv"}
+                            >
+                                <Button variant="secondary">
+                                    CSV  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </CSVLink>
+
                         </Col>
                     </Row>
                 </Form>
             </div>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -86,8 +109,8 @@ const RevisarYBuscar = () => {
                         <th>Costo Unitario</th>
                         <th>Costo Total</th>
                         <th>Acciones</th>
-                    </tr>
-                </thead>
+                    </tr >
+                </thead >
                 <tbody>
                     {filtroEntradas.map(entrada => (
                         <tr key={entrada.folio}>
@@ -108,9 +131,8 @@ const RevisarYBuscar = () => {
                         </tr>
                     ))}
                 </tbody>
-            </Table>
-        </>
-    )
-}
+            </Table >
+        </>)
+};
 
 export default RevisarYBuscar;
