@@ -19,6 +19,12 @@ body {
     width: 100%;
     height: fit-content;
     margin-left: auto;
+
+      
+  Button:focus, :active {
+    outline: none;
+    box-shadow: none;
+  }
   }
 }
 
