@@ -3,7 +3,7 @@ import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
 import { CSVLink } from "react-csv";
-import DocumentPdf from "./DocumentPdf";
+import DocumentPdf from "./reportPdf/DocumentPdf";
 import { PDFDownloadLink } from '@react-pdf/renderer'
 
 const RevisarYBuscar = () => {
