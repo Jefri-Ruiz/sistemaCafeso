@@ -1,6 +1,6 @@
 import React from "react";
 import "./home.scss";
-import logo from '../../images/Imagotipo.png'
+import logo from '../../images/Imagotipo.svg'
 import RevisarYBuscar from '../inventario/RevisarYBuscar';
 const Home = () => {
   return (
