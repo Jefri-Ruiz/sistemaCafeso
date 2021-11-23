@@ -29,6 +29,7 @@ const Entradas = () => {
             <Tab eventKey="Revisar y buscar" title="Revisar y buscar">
               <RevisarYBuscar key={key}/>
             </Tab>
+            {console.log(key)}
           </Tabs>
         </div>
       </div>

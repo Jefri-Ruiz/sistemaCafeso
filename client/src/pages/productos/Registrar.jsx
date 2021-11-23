@@ -3,11 +3,11 @@ import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 
 const Productos = () => {
 
-    const [sku, setSku] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [precioUnitario, setPrecioUnitario] = useState('');
-    const [stockSistema, setStockSistema] = useState('');
-    const [iva, setIva] = useState('');
+    const [sku, setSku] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [precioUnitario, setPrecioUnitario] = useState("");
+    const [stockSistema, setStockSistema] = useState("");
+    const [iva, setIva] = useState("");
 
     //const precioIva = precioUnitario * 0.16;
     //const precioPublico = parseFloat(precioUnitario) + parseFloat(precioIva);
@@ -45,7 +45,7 @@ const Productos = () => {
                             <Form.Control
                                 autoComplete="off"
                                 type="number"
-                                placeholder="Codigo del producto"
+                                placeholder="1"
                                 value={sku}
                                 onChange={e => setSku(e.target.value)}
                                 required={true}
@@ -58,7 +58,7 @@ const Productos = () => {
                             <Form.Control
                                 autoComplete="off"
                                 type="number"
-                                placeholder="Cantidad"
+                                placeholder="0"
                                 value={stockSistema}
                                 onChange={e => setStockSistema(e.target.value)}
                                 required={true}
@@ -74,7 +74,7 @@ const Productos = () => {
                                 <Form.Control
                                     autoComplete="off"
                                     type="number"
-                                    placeholder="Precio"
+                                    placeholder="0.00"
                                     value={precioUnitario}
                                     onChange={e => setPrecioUnitario(e.target.value)}
                                     pattern="[0-9]{10}$"
@@ -83,7 +83,7 @@ const Productos = () => {
                             </InputGroup>
                         </Form.Group>
 
-                        <Form.Group as={Col} xs={2} className="mb-4" controlId="formIva">
+                        <Form.Group as={Col} className="mb-4" controlId="formIva">
                             <Form.Label>IVA</Form.Label>
                             <InputGroup className="mb-3">
                                 <Form.Control
@@ -101,10 +101,10 @@ const Productos = () => {
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control
-                                    placeholder="Precio al Cliente"
                                     type="number"
-                                   value={precioUnitario+precioUnitario}
-                                    onChange={() => { return (precioUnitario + ((precioUnitario * iva)/100)) }}
+                                    placeholder="0.00"
+                                    value={(precioUnitario + ((precioUnitario * iva) / 100))}
+                                    onChange={() => { return (precioUnitario + ((precioUnitario * iva) / 100)) }}
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -115,9 +115,9 @@ const Productos = () => {
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control
                                     type="number"
-                                    placeholder="Costo real de Almacen"
-                                  // value={precioPublico * stockSistema}
-                                  // onChange={() => {  precioPublico * stockSistema }}
+                                    placeholder="0.00"
+                                    value={stockSistema * (precioUnitario + ((precioUnitario * iva) / 100))}
+                                    onChange={() => {return (stockSistema * (precioUnitario + ((precioUnitario * iva) / 100))) }}
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -135,9 +135,6 @@ const Productos = () => {
                             required={true}
                         />
                     </Form.Group>
-
-                    <br />
-
                     <Button variant="primary" type="submit">
                         Agregar
                     </Button>
@@ -147,4 +144,4 @@ const Productos = () => {
     )
 }
 
-export default Productos
+export default Productos;

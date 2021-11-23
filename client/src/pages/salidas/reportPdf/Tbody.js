@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     },
 
     item: {
-        width: '30%',
+        width: '35%',
         textAlign: 'left',
         borderRightColor: borderColor,
         borderRightWidth: 1,
@@ -30,17 +30,18 @@ const styles = StyleSheet.create({
 });
 
 
-const Tbody = ({ entradas }) => {
-    const rows = entradas.map(entrada =>
-        <View style={styles.row} key={entrada.folio}>
-            <Text style={styles.smallItem}>{entrada.folio}</Text>
-            <Text style={styles.smallItem}>{entrada.sku}</Text>
-            <Text style={styles.smallItem}>{entrada.idproveedor}</Text>
-            <Text style={styles.item}>{entrada.fecha}</Text>
-            <Text style={styles.item}>{entrada.hora}</Text>
-            <Text style={styles.smallItem}>{entrada.cantidad}</Text>
-            <Text style={styles.item}>$ {entrada.costounitario}</Text>
-            <Text style={styles.item}>$ {entrada.costototal}</Text>
+const Tbody = ({ salidas }) => {
+    const rows = salidas.map(salida =>
+        <View style={styles.row} key={salida.folio}>
+            <Text style={styles.smallItem}>{salida.folio}</Text>
+            <Text style={styles.smallItem}>{salida.sku}</Text>
+            <Text style={styles.smallItem}>{salida.idcliente}</Text>
+            <Text style={styles.item}>{salida.fecha}</Text>
+            <Text style={styles.item}>{salida.hora}</Text>
+            <Text style={styles.smallItem}>{salida.cantidad}</Text>
+            <Text style={styles.item}>$ {salida.preciopublico}</Text>
+            <Text style={styles.smallItem}>{salida.descuento} %</Text>
+            <Text style={styles.item}>$ {salida.montototal}</Text>
         </View>
     )
     return (<Fragment>{rows}</Fragment>)

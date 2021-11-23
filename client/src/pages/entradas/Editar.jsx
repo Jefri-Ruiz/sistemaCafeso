@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import SelectProductos from "../../components/consultas/SelectProductos";
 import SelectProveedor from "../../components/consultas/SelectProveedor";
 
-const Editar = ({ entrada }) => {
+const Editar = ({ entrada, getEntradas }) => {
 
     const [sku, setSku] = useState(entrada.sku);
     const [idProveedor, setIdProveedor] = useState(entrada.idproveedor);
@@ -31,7 +31,7 @@ const Editar = ({ entrada }) => {
             });
             console.log(response);
             handleClose();
-            
+            getEntradas();
         } catch (err) {
             console.error(err.message);
         }

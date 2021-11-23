@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import SelectProductos from "../../components/consultas/SelectProductos";
 
-const Editar = ({ inventario }) => {
+const Editar = ({ inventario, getInventario }) => {
 
     const [fecha, setFecha] = useState(inventario.fecha);
     const [hora, setHora] = useState(inventario.hora);
@@ -30,6 +30,7 @@ const Editar = ({ inventario }) => {
             });
             console.log(response);
             handleClose();
+            getInventario();
         } catch (err) {
             console.error(err.message);
         }

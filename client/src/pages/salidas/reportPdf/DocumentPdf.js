@@ -3,10 +3,10 @@ import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import Thead from "./Thead";
 import Tbody from "./Tbody";
 
-const DocumentPdf = ({ entradas }) => {
+const DocumentPdf = ({ salidas }) => {
 
     const styles = StyleSheet.create({
-
+        
         title: {
             marginTop: '30',
             marginBottom: '10',
@@ -28,11 +28,12 @@ const DocumentPdf = ({ entradas }) => {
         <Document>
             <Page size="A4">
                 <View style={styles.title}>
-                    <Text>Entradas</Text>
+                    <Text>Salidas</Text>
                 </View>
                 <View style={styles.tableContainer}>
+                    
                     <Thead />
-                    <Tbody entradas={entradas} />                   
+                    <Tbody salidas={salidas} />                   
                 </View>
             </Page>
         </Document>

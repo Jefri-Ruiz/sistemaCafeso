@@ -29,7 +29,7 @@ const Inventario = () => {
             </Tab>
 
             <Tab eventKey="Revisar y buscar" title="Revisar y buscar">
-              <RevisarYBuscar key={key}/>
+              <RevisarYBuscar key={key} />
             </Tab>
           </Tabs>
         </div>
