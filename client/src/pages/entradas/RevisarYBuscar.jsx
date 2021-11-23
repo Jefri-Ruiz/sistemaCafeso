@@ -4,25 +4,12 @@ import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
 import { CSVLink } from "react-csv";
 import DocumentPdf from "./reportPdf/DocumentPdf";
-import { PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 const RevisarYBuscar = () => {
 
     const [entradas, setEntradas] = useState([]);
     const [buscar, setBuscar] = useState("");
-
-    //Delete function
-    const deleteEntrada = async (folio) => {
-        try {
-            const request = await fetch(`http://localhost:5000/entradas/${folio}`, {
-                method: "DELETE"
-            });
-            console.log(request);
-            setEntradas(entradas.filter(entrada => entrada.folio !== folio));
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
 
     //Get function
     const getEntradas = async () => {
@@ -44,6 +31,18 @@ const RevisarYBuscar = () => {
         entrada.fecha.includes(buscar)
     ));
 
+    //Delete function
+    const deleteEntrada = async (folio) => {
+        try {
+            const request = await fetch(`http://localhost:5000/entradas/${folio}`, {
+                method: "DELETE"
+            });
+            console.log(request);
+            getEntradas();
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
 
     return (
         <>
@@ -71,15 +70,11 @@ const RevisarYBuscar = () => {
                                 </InputGroup>
                             </Form.Group>
                         </Col>
-                        <Col className="mb-3">
-                            <Button variant="primary" style={{ marginRight: 20 }}
-                                onClick={getEntradas} >
-                                <FaIcons.FaSync className="h-100 w-100" />
-                            </Button>
+                        <Col className="mb-3">                
 
                             <PDFDownloadLink
                                 document={<DocumentPdf entradas={filtroEntradas} />}
-                                filename="eentradas.pdf"
+                                filename="entradas.pdf"
                             >
                                 <Button variant="secondary" style={{ marginRight: 20 }}>
                                     PDF  <FaIcons.FaDownload className="h-150 w-150" />
@@ -126,7 +121,7 @@ const RevisarYBuscar = () => {
                             <td>$ {entrada.costounitario}</td>
                             <td>$ {entrada.costototal}</td>
                             <td className="d-flex justify-content-around align-items-center">
-                                <Editar entrada={entrada} />
+                                <Editar entrada={entrada} getEntradas={getEntradas} />
                                 <Button className="btn btn-danger" onClick={() => deleteEntrada(entrada.folio)}>
                                     <FaIcons.FaTrashAlt className="h-100 w-100" />
                                 </Button>
@@ -135,7 +130,8 @@ const RevisarYBuscar = () => {
                     ))}
                 </tbody>
             </Table >
-        </>)
+        </>
+    )
 };
 
 export default RevisarYBuscar;

@@ -28,19 +28,26 @@ const styles = StyleSheet.create({
         borderRightColor: borderColor,
         borderRightWidth: 1,
         paddingLeft: 8,
+    },
+    bigItem: {
+        width: '50%',
+        textAlign: 'left',
+        borderRightColor: borderColor,
+        borderRightWidth: 1,
+        paddingLeft: 8,
     }
 });
 
 const Thead = () => (
     <View style={styles.container}>
-        <Text style={styles.smallItem}>Folio</Text>
-        <Text style={styles.smallItem}>SKU</Text>
-        <Text style={styles.smallItem}>ID Proveedor</Text>
+        <Text style={styles.smallItem}>ID</Text>
         <Text style={styles.item}>Fecha</Text>
         <Text style={styles.item}>Hora</Text>
-        <Text style={styles.smallItem}>Cantidad</Text>
-        <Text style={styles.item}>Costo Unitario</Text>
-        <Text style={styles.item}>Costo Total</Text>
+        <Text style={styles.smallItem}>SKU</Text>
+        <Text style={styles.bigItem}>Descripcion</Text>
+        <Text style={styles.smallItem}>Stock sistema</Text>
+        <Text style={styles.smallItem}>Stock fisico</Text>
+        <Text style={styles.item}>Precio unitario</Text>
     </View>
 );
 

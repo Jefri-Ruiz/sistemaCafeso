@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col, InputGroup} from "react-bootstrap";
+import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import SelectProductos from "../../components/consultas/SelectProductos";
 import SelectClientes from "../../components/consultas/SelectClientes";
 
@@ -48,18 +48,24 @@ const Salidas = () => {
                             <Form.Control type="text" placeholder="S001"
                                 value={folio}
                                 onChange={e => setFolio(e.target.value)}
+                                required={true}
+                                pattern="^S[0-9]{3}$"
                             />
                         </Form.Group>
 
                         <Form.Group as={Col} className="mb-3" controlId="formNumSku">
                             <Form.Label>SKU</Form.Label>
-                            <Form.Select aria-label="Default select example" value={sku} onChange={e => { setSku(e.target.value) }} >
-                                <option>Abrir para seleccionar</option>
+                            <Form.Select aria-label="Default select example"
+                                value={sku}
+                                onChange={e => { setSku(e.target.value) }}
+                                required={true}
+                            >
+                                <option value="">Abrir para seleccionar</option>
                                 {
                                     SelectProductos().map(producto => (
                                         <option
                                             key={producto.sku}
-                                            value={producto.sku}
+                                            value={producto.sku} required
                                         >#{producto.sku} | {producto.descripcion}</option>
                                     ))
                                 }
@@ -68,8 +74,12 @@ const Salidas = () => {
                     </Row>
                     <Form.Group className="mb-3" controlId="formIdCliente">
                         <Form.Label>ID Cliente</Form.Label>
-                        <Form.Select aria-label="Default select example" value={idCliente} onChange={e => { setIdCliente(e.target.value) }} >
-                            <option>Abrir para seleccionar</option>
+                        <Form.Select aria-label="Default select example"
+                            value={idCliente}
+                            onChange={e => { setIdCliente(e.target.value) }}
+                            required={true}
+                        >
+                            <option value="">Abrir para seleccionar</option>
                             {
                                 SelectClientes().map(cliente => (
                                     <option
@@ -81,49 +91,57 @@ const Salidas = () => {
                         </Form.Select>
                     </Form.Group>
                     <Row className="align-items-center">
-                        <Form.Group as={Col} className="mb-3" controlId="formFecha">
+                        <Form.Group as={Col} className="mb-3" controlId="formFecha" >
                             <Form.Label>Fecha</Form.Label>
                             <Form.Control type="date"
                                 value={fecha}
                                 onChange={e => setFecha(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} className="mb-3" controlId="formHora">
+                        <Form.Group as={Col} className="mb-3" controlId="formHora" >
                             <Form.Label>Hora</Form.Label>
                             <Form.Control type="time"
                                 value={hora}
                                 onChange={e => setHora(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
 
                     <Row className="align-items-center">
-                        <Form.Group as={Col} className="mb-3" controlId="formCantidad">
+                        <Form.Group as={Col} className="mb-3" controlId="formCantidad" >
                             <Form.Label>Cantidad</Form.Label>
                             <Form.Control type="number" placeholder="1"
                                 value={cantidad}
                                 onChange={e => setCantidad(e.target.value)}
+                                required={true}
+                                min="0"
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} className="mb-3" controlId="formPrecioPublico">
+                        <Form.Group as={Col} className="mb-3" controlId="formPrecioPublico" >
                             <Form.Label>Precio Publico</Form.Label>
                             <InputGroup>
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <Form.Control type="number" placeholder="0.01"
                                     value={precioPublico}
                                     onChange={e => setPrecioPublico(e.target.value)}
+                                    required={true}
+                                    min="0" step="any"
                                 />
                             </InputGroup>
                         </Form.Group>
 
-                        <Form.Group as={Col} className="mb-3" controlId="formDescuento">
+                        <Form.Group as={Col} className="mb-3" controlId="formDescuento" >
                             <Form.Label>Descuento</Form.Label>
                             <InputGroup>
-                                <Form.Control type="number" placeholder="0.01"
+                                <Form.Control type="number" placeholder="0.00"
                                     value={descuento}
                                     onChange={e => setDescuento(e.target.value)}
+                                    required={true}
+                                    min="0" max="100" step="any"
                                 />
                                 <InputGroup.Text>%</InputGroup.Text>
                             </InputGroup>
@@ -136,6 +154,7 @@ const Salidas = () => {
                                 <Form.Control type="number"
                                     value={(cantidad * precioPublico) - (((cantidad * precioPublico) * descuento) / 100)}
                                     onChange={() => { return ((cantidad * precioPublico) - ((cantidad * precioPublico) * descuento) / 100) }}
+                                    min="0" step="any"
                                 />
                             </InputGroup>
                         </Form.Group>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
 import './sidebar.scss'
-
 import perfil  from '../../images/perfil.jpg'
 import logo from '../../images/Imagotipo.png'
 import { Button } from 'react-bootstrap'
@@ -18,7 +17,7 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="sidebar__top">
                 <div className="sidebar__top__menu">
-                            <img src={logo} alt="Preseguro" className="logo"/>
+                            <img src={logo} alt="cafeso" className="logo"/>
                             <Button variant=" rounded py-2 px-2" onClick={() => {setShow(!show); }}><FaIcons.FaAlignLeft/></Button>
                 </div>
                 <div className="sidebar__top__perfil">

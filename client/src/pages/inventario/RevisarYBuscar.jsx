@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import Editar from './Editar';
-
+import { CSVLink } from "react-csv";
+import DocumentPdf from "./reportPdf/DocumentPdf";
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 const RevisarYBuscar = () => {
-
-
-
     const [inventario, setInventario] = useState([]);
     const [buscar, setBuscar] = useState("");
 
@@ -18,12 +17,13 @@ const RevisarYBuscar = () => {
                 method: "DELETE"
             });
             console.log(request);
-            setInventario(inventario.filter(inventario => inventario.idinventario !== idInventario));
+            getInventario();
         } catch (err) {
             console.error(err.message);
         }
     };
 
+    //Get a Inventario
     const getInventario = async () => {
         try {
             const response = await fetch("http://localhost:5000/inventario");
@@ -45,8 +45,6 @@ const RevisarYBuscar = () => {
     return (
         <>
             <div className="inventario__nav" >
-
-
                 <Form>
                     <Row className="align-items-center">
                         <Col className="mb-3">
@@ -60,7 +58,24 @@ const RevisarYBuscar = () => {
                             </Form.Group>
                         </Col>
                         <Col className="mb-3">
-                            <Button variant="primary" onClick={getInventario}>Refrescar</Button>
+
+                            <PDFDownloadLink
+                                document={<DocumentPdf inventario={filtroInventario} />}
+                                filename="inventario.pdf"
+                            >
+                                <Button variant="secondary" style={{ marginRight: 20 }}>
+                                    PDF  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </PDFDownloadLink>
+
+                            <CSVLink
+                                data={filtroInventario}
+                                filename={"inventario.csv"}
+                            >
+                                <Button variant="secondary">
+                                    CSV  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </CSVLink>
                         </Col>
                     </Row>
                 </Form>
@@ -91,7 +106,7 @@ const RevisarYBuscar = () => {
                             <td>{inventario.stockfisico}</td>
                             <td>$ {inventario.preciounitario}</td>
                             <td className="d-flex justify-content-around align-items-center">
-                                <Editar inventario={inventario} />
+                                <Editar inventario={inventario} getInventario={getInventario} />
                                 <Button className="btn btn-danger" onClick={() => deleteInventario(inventario.idinventario)}>
                                     <FaIcons.FaTrashAlt className="h-100 w-100" />
                                 </Button>

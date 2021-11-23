@@ -1,15 +1,19 @@
 import React from "react";
-/* import Topbar from "../../components/Topbar/Topbar"; */
 import "./home.scss";
-
+import logo from '../../images/Imagotipo.png'
+import RevisarYBuscar from '../inventario/RevisarYBuscar';
 const Home = () => {
   return (
     <>
       <div className="home">
         <div className="container">
           <div className="home__titulo">
-            <h2>Dashboard Cafeso</h2>
+            <h1>Bienvenido al Sistema de Inventario</h1>
+            <img src={logo} alt="cafeso" className="logo"/>
+            <h2>Inventario</h2>
+            <RevisarYBuscar />
           </div>
+
         </div>
       </div>
     </>
