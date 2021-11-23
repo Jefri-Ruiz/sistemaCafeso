@@ -67,13 +67,6 @@ const RevisarYBuscar = () => {
           </Col>
 
           <Col className="mb-3">
-            <Button
-              variant="primary"
-              style={{ marginRight: 20 }}
-              onClick={getClientes}
-            >
-              <FaIcons.FaSync className="h-100 w-100" />
-            </Button>
 
             <PDFDownloadLink
               document={<DocumentPdf clientes={filtroClientes} />}

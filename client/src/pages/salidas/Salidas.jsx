@@ -28,7 +28,7 @@ const Salidas = () => {
             </Tab>
 
             <Tab eventKey="Revisar y buscar" title="Revisar y buscar">
-              <RevisarYBuscar />
+              <RevisarYBuscar key={key}/>
             </Tab>
           </Tabs>
         </div>

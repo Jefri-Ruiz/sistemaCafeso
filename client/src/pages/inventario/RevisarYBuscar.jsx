@@ -59,9 +59,6 @@ const RevisarYBuscar = () => {
                                 </InputGroup>
                             </Form.Group>
                         </Col>
-                        <Col className="mb-3">
-                            <Button variant="primary" onClick={getInventario}>Refrescar</Button>
-                        </Col>
                     </Row>
                 </Form>
             </div>

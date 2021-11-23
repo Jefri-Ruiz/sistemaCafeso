@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button} from "react-bootstrap";
 import * as FaIcons from "react-icons/fa";
 import EditarUsuario from "./EditarUsuario";
 
-const ListarUsuarios = () => {
+const RevisarYBuscar = () => {
   const [usuarios, setUsuarios] = useState([]);
+ /*  const [buscar, setBuscar] = useState(""); */
 
   /* prueba delete usuario funciona*/
 
@@ -42,17 +43,36 @@ const ListarUsuarios = () => {
     getUsuarios();
   }, []);
 
+  /* const filtroClientes = usuarios.filter((usuario) =>
+    usuario.nombre.toUpperCase().includes(buscar.toUpperCase())
+  ); */
+
   console.log(usuarios);
 
   return (
     <>
-      <div className="usuarios__nav d-flex justify-content-end">
-        <Button
-          variant="outline-primary"
-          onClick={getUsuarios}
-        >
-          Refrescar
-        </Button>
+    <div className="usuarios__nav">
+      {/* <Form>
+        <Row className="align-items-center">
+          <Col className="mb-3">
+            <Form.Group
+              as={Col}
+              xs={11}
+              className="mb-0"
+              controlId="formBuscar"
+            >
+              <InputGroup className="mb-0">
+                <InputGroup.Text>Buscar por:</InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Nombre del usuario"
+                  onChange={(e) => setBuscar(e.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Col>
+        </Row>
+      </Form> */}
       </div>
 
       <Table striped bordered hover>
@@ -96,4 +116,4 @@ const ListarUsuarios = () => {
   );
 };
 
-export default ListarUsuarios;
+export default RevisarYBuscar;
