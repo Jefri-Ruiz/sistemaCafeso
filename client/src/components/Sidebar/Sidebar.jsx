@@ -55,9 +55,6 @@ const Sidebar = () => {
                     <NavLink to="/usuarios" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaFileInvoiceDollar className="me-2"/> <p>Usuarios</p></NavLink>
                 </li>
                 <li>
-                    <NavLink to="/configuracion" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaCog className="me-2"/> <p>Configuración</p></NavLink>
-                </li>
-                <li>
                     <NavLink to="/documentacion" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaBook className="me-2"/> <p>Documentación</p></NavLink>
                 </li>
             </ul>
@@ -104,9 +101,6 @@ const Sidebar = () => {
                 </li>
                 <li>
                     <NavLink to="/usuarios" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaUserCheck /> </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/configuracion" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaCog /> </NavLink>
                 </li>
                 <li>
                     <NavLink to="/documentacion" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaBook /> </NavLink>

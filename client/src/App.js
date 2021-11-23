@@ -12,7 +12,7 @@ import Clientes from './pages/clientes/Clientes';
 import Productos from './pages/productos/Productos';
 import Insumos from './pages/insumos/Insumos';
 import Docs from './pages/documentacion/Docs';
-import Config from './pages/configuracion/Config';
+import Login from './pages/login/Login';
 import Entradas from './pages/entradas/Entradas';
 import Salidas from './pages/salidas/Salidas';
 import Inventario from './pages/inventario/Inventario';
@@ -36,7 +36,7 @@ function App() {
             <Route path="/salidas" exact={true} component={Salidas}/>
             <Route path="/inventario" exact={true} component={Inventario}/>
             <Route path="/usuarios" exact={true} component={Usuarios}/>
-            <Route path="/configuracion" exact={true} component={Config}/>
+            <Route path="/Login" exact={true} component={Login}/>
             <Route path="/documentacion" exact={true} component={Docs}/>
           </div>
         </div>

@@ -1,6 +1,6 @@
 @import '../../components/Sidebar/sidebar.scss';
 
-.config{
+.login{
     background-color: whitesmoke;
     padding: 1.5rem 1rem 1rem 1rem;
     /* border: 2px solid red; */
@@ -10,5 +10,10 @@
 
     &__titulo{
         margin-bottom: 2rem;
+        /* background-color: red; */
+    }
+    &__form{
+        margin-bottom: 2rem;
+        /* background-color: green */;
     }
 }
