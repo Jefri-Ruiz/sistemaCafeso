@@ -5,22 +5,6 @@ import SelectProveedor from "../../components/consultas/SelectProveedor";
 
 const Entradas = () => {
 
-    // let getHoraActual = () => {
-    //     let today = new Date();
-    //     let horaActual = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    //     return horaActual;
-    // }
-
-
-    // let getFechaActual = () => {
-    //     let today = new Date();
-    //     let fechaActual = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    //     return fechaActual;
-    // }
-
-    // console.log(getFechaActual());
-    // console.log(getHoraActual());
-   
     const [folio, setFolio] = useState("");
     const [sku, setSku] = useState("");
     const [idProveedor, setIdProveedor] = useState("");
@@ -50,6 +34,7 @@ const Entradas = () => {
             setHora("");
             setCantidad("");
             setCostoUnitario("");
+
         } catch (err) {
             console.log(err.message);
         }
@@ -62,32 +47,41 @@ const Entradas = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formFolio">
                             <Form.Label>Folio</Form.Label>
-                            <Form.Control type="text" placeholder="E001" pattern="^[A-Za-z0-9]{3,16}$" required={true}
+                            <Form.Control type="text"
+                                placeholder="E001"
+                                pattern="^E[0-9]{3}$"
                                 value={folio}
                                 onChange={e => setFolio(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
-
                         <Form.Group as={Col} className="mb-3" controlId="formNumSku">
                             <Form.Label>SKU</Form.Label>
-                            <Form.Select aria-label="Default select example" value={sku} onChange={e => {setSku(e.target.value)}} >
-                            <option>Abrir para seleccionar</option>
-                            {
-                                SelectProductos().map(producto => (
-                                    <option
-                                        key={producto.sku}
-                                        value={producto.sku}
-                                    >#{producto.sku} | {producto.descripcion} </option>
-                                ))
-                            }
-
-                        </Form.Select>
+                            <Form.Select aria-label="Default select example"
+                                value={sku}
+                                onChange={e => { setSku(e.target.value) }}
+                                required={true}
+                            >
+                                <option value="">Abrir para seleccionar</option>
+                                {
+                                    SelectProductos().map(producto => (
+                                        <option
+                                            key={producto.sku}
+                                            value={producto.sku}
+                                        >#{producto.sku} | {producto.descripcion} </option>
+                                    ))
+                                }
+                            </Form.Select>
                         </Form.Group>
                     </Row>
                     <Form.Group className="mb-3" controlId="formIdProveedor">
                         <Form.Label>ID Proveedor</Form.Label>
-                        <Form.Select aria-label="Default select example" value={idProveedor} onChange={e => {setIdProveedor(e.target.value)}} >
-                            <option>Abrir para seleccionar</option>
+                        <Form.Select aria-label="Default select example"
+                            value={idProveedor}
+                            onChange={e => { setIdProveedor(e.target.value) }}
+                            required={true}
+                        >
+                            <option value="">Abrir para seleccionar</option>
                             {
                                 SelectProveedor().map(proveedor => (
                                     <option
@@ -104,6 +98,7 @@ const Entradas = () => {
                             <Form.Control type="date"
                                 value={fecha}
                                 onChange={e => setFecha(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
 
@@ -112,6 +107,7 @@ const Entradas = () => {
                             <Form.Control type="time"
                                 value={hora}
                                 onChange={e => setHora(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -119,9 +115,11 @@ const Entradas = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formCantidad">
                             <Form.Label>Cantidad</Form.Label>
-                            <Form.Control type="number" placeholder="1"
+                            <Form.Control type="number" placeholder="0"
                                 value={cantidad}
                                 onChange={e => setCantidad(e.target.value)}
+                                required={true}
+                                min="0" 
                             />
                         </Form.Group>
 
@@ -129,9 +127,11 @@ const Entradas = () => {
                             <Form.Label>Costo unitario</Form.Label>
                             <InputGroup>
                                 <InputGroup.Text>$</InputGroup.Text>
-                                <Form.Control type="number" placeholder="0.01"
+                                <Form.Control type="number" placeholder="0.00"
                                     value={costoUnitario}
                                     onChange={e => setCostoUnitario(e.target.value)}
+                                    required={true}
+                                    min="0" step="any"
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -143,6 +143,7 @@ const Entradas = () => {
                                 <Form.Control type="number"
                                     value={cantidad * costoUnitario}
                                     onChange={() => { return cantidad * costoUnitario }}
+                                    min="0" step="any"
                                 />
                             </InputGroup>
                         </Form.Group>

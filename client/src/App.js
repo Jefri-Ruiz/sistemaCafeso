@@ -23,7 +23,6 @@ function App() {
   return (
     <>
       <Router>
-        
         <div className="flex">
           <Sidebar/>
           <div className="content">

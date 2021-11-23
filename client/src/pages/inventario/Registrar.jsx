@@ -44,9 +44,11 @@ const Registrar = () => {
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formIdInventario">
                             <Form.Label>ID Inventario</Form.Label>
-                            <Form.Control type="number" placeholder="1" required={true}
+                            <Form.Control type="number" placeholder="1"
                                 value={idInventario}
                                 onChange={e => setIdInventario(e.target.value)}
+                                required={true}
+                                min="0"
                             />
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3" controlId="formFecha">
@@ -54,6 +56,7 @@ const Registrar = () => {
                             <Form.Control type="date"
                                 value={fecha}
                                 onChange={e => setFecha(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3" controlId="formHora">
@@ -61,20 +64,27 @@ const Registrar = () => {
                             <Form.Control type="time"
                                 value={hora}
                                 onChange={e => setHora(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
                     <Row className="align-items-center">
                         <Form.Group as={Col} className="mb-3" controlId="formSku">
                             <Form.Label>SKU</Form.Label>
-                            <Form.Select aria-label="Default select example" value={sku} onChange={e => { setSku(e.target.value) }} >
-                                <option>Abrir para seleccionar</option>
+                            <Form.Select aria-label="Default select example"
+                                value={sku}
+                                onChange={e => { setSku(e.target.value) }}
+                                required={true}
+                            >
+                                <option value="">Abrir para seleccionar</option>
                                 {
                                     SelectProductos().map(producto => (
                                         <option
                                             key={producto.sku}
                                             value={producto.sku}
-                                        >#{producto.sku} | {producto.descripcion}</option>
+                                        >
+                                            #{producto.sku} | {producto.descripcion}
+                                        </option>
                                     ))
                                 }
                             </Form.Select>
@@ -84,6 +94,7 @@ const Registrar = () => {
                             <Form.Control type="text" placeholder="Descripcion"
                                 value={descripcion}
                                 onChange={e => setDescripcion(e.target.value)}
+                                required={true}
                             />
                         </Form.Group>
                     </Row>
@@ -93,6 +104,8 @@ const Registrar = () => {
                             <Form.Control type="number" placeholder="0"
                                 value={stockSistema}
                                 onChange={e => setStockSistema(e.target.value)}
+                                required={true}
+                                min="0"
                             />
                         </Form.Group>
                         <Form.Group as={Col} className="mb-3" controlId="formStockFisico">
@@ -101,6 +114,8 @@ const Registrar = () => {
                                 <Form.Control type="number" placeholder="0"
                                     value={stockFisico}
                                     onChange={e => setStockFisico(e.target.value)}
+                                    required={true}
+                                    min="0"
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -112,6 +127,8 @@ const Registrar = () => {
                                 <Form.Control type="number" placeholder="0.00"
                                     value={precioUnitario}
                                     onChange={e => setPrecioUnitario(e.target.value)}
+                                    required={true}
+                                    min="0" step="any"
                                 />
                             </InputGroup>
                         </Form.Group>
