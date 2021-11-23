@@ -3,7 +3,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Link } from "react-router-dom";
 
-import ListarUsuarios from "./ListarUsuarios";
+import RevisarYBuscar from "./RevisarYBuscar";
 import RegistrarUsuarios from "./RegistrarUsuarios";
 
 import "./usuarios.scss";
@@ -37,7 +37,7 @@ const Usuarios = () => {
             </Tab>
 
             <Tab eventKey="Revisar y buscar" title="Revisar y buscar">
-              <ListarUsuarios />
+              <RevisarYBuscar key={key}/>
             </Tab>
 
           </Tabs>

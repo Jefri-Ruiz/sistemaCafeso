@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         height: 24,
         fontStyle: 'bold',
     },
+
     smallItem: {
         width: '20%',
         textAlign: 'left',
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     },
 
     item: {
-        width: '35%',
+        width: '30%',
         textAlign: 'left',
         borderRightColor: borderColor,
         borderRightWidth: 1,

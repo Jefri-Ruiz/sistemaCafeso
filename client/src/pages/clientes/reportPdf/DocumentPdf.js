@@ -3,7 +3,7 @@ import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import Thead from "./Thead";
 import Tbody from "./Tbody";
 
-const DocumentPdf = ({ entradas }) => {
+const DocumentPdf = ({ clientes }) => {
 
     const styles = StyleSheet.create({
 
@@ -31,8 +31,9 @@ const DocumentPdf = ({ entradas }) => {
                     <Text>Entradas</Text>
                 </View>
                 <View style={styles.tableContainer}>
+
                     <Thead />
-                    <Tbody entradas={entradas} />                   
+                    <Tbody clientes={clientes} />                   
                 </View>
             </Page>
         </Document>

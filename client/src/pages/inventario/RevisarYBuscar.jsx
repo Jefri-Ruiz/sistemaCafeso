@@ -57,8 +57,8 @@ const RevisarYBuscar = () => {
                                 </InputGroup>
                             </Form.Group>
                         </Col>
-                        <Col className="mb-3">
 
+                        <Col className="mb-3">
                             <PDFDownloadLink
                                 document={<DocumentPdf inventario={filtroInventario} />}
                                 filename="inventario.pdf"

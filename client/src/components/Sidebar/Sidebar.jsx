@@ -39,7 +39,7 @@ const Sidebar = () => {
                     <NavLink to="/productos" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaBoxes className="me-2"/> <p>Productos</p></NavLink>
                 </li>
                 <li>
-                    <NavLink to="/insumos" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaTape className="me-2"/> <p>Insumos</p></NavLink>
+                    <NavLink to="/insumos" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaBoxOpen className="me-2"/> <p>Insumos</p></NavLink>
                 </li>
                 <li>
                     <NavLink to="/entradas" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaDollyFlatbed className="me-2"/> <p>Entradas</p></NavLink>
@@ -49,9 +49,6 @@ const Sidebar = () => {
                 </li>
                 <li>
                     <NavLink to="/inventario" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaClipboardList className="me-2"/> <p>Inventario</p></NavLink>
-                </li>
-                <li>
-                    <NavLink to="/reportes" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaFileInvoiceDollar className="me-2"/> <p>Reportes</p></NavLink>
                 </li>
                 <li>
                     <NavLink to="/usuarios" exact className="rounded py-2 px-2 w-100 d-inline-block " activeClassName="active"><FaIcons.FaFileInvoiceDollar className="me-2"/> <p>Usuarios</p></NavLink>
@@ -93,7 +90,7 @@ const Sidebar = () => {
                     <NavLink to="/productos" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaBoxes /> </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/insumos" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaTape /> </NavLink>
+                    <NavLink to="/insumos" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaBoxOpen /> </NavLink>
                 </li>
                 <li>
                     <NavLink to="/entradas" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaDollyFlatbed /> </NavLink>
@@ -103,9 +100,6 @@ const Sidebar = () => {
                 </li>
                 <li>
                     <NavLink to="/inventario" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaClipboardList /> </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/reportes" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaFileInvoiceDollar /> </NavLink>
                 </li>
                 <li>
                     <NavLink to="/usuarios" exact className="rounded py-2 px-2" activeClassName="active"><FaIcons.FaUserCheck /> </NavLink>

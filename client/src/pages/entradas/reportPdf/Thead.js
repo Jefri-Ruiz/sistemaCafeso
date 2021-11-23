@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         fontStyle: 'bold',
         flexGrow: 1,
     },
+
     smallItem: {
         width: '20%',
         textAlign: 'left',

@@ -69,6 +69,7 @@ const RevisarYBuscar = () => {
                                 </InputGroup>
                             </Form.Group>
                         </Col>
+
                         <Col className="mb-3">
 
                             <PDFDownloadLink

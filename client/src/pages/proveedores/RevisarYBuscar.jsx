@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Table, Button, Form, Col, Row, InputGroup } from "react-bootstrap";
 import * as FaIcons from 'react-icons/fa';
 import EditarProveedor from './EditarProveedor';
+import { CSVLink } from "react-csv";
+import DocumentPdf from "./reportPdf/DocumentPdf";
+import { PDFDownloadLink } from '@react-pdf/renderer'
 
 const RevisarYBuscar = () => {
 
@@ -41,11 +44,10 @@ const RevisarYBuscar = () => {
 
     return (
         <>
-
+            <div className="proveedores__nav">
             <Form>
-                <Form.Label></Form.Label>
                 <Row className="align-items-center">
-
+                    <Col className="mb-3">
                     <Form.Group as={Col} xs={11} className="mb-0" controlId="formBuscar">
                         <InputGroup className="mb-0">
                             <InputGroup.Text>Buscar por:</InputGroup.Text>
@@ -56,9 +58,32 @@ const RevisarYBuscar = () => {
                             />
                         </InputGroup>
                     </Form.Group>
-                    <Button as={Col} xs="auto" onClick={getProveedores}>Refrescar</Button>
+                    </Col>
+                    <Col className="mb-3">
+
+                            <PDFDownloadLink
+                                document={<DocumentPdf proveedores={filtroProveedores} />}
+                                filename="Proveedores.pdf"
+                            >
+                                <Button variant="secondary" style={{ marginRight: 20 }}>
+                                    PDF  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </PDFDownloadLink>
+
+                            <CSVLink
+                                data={filtroProveedores}
+                                filename={"proveedores.csv"}
+                            >
+                                <Button variant="secondary">
+                                    CSV  <FaIcons.FaDownload className="h-150 w-150" />
+                                </Button>
+                            </CSVLink>
+
+                        </Col>
+                    
                 </Row>
             </Form>
+            </div>
 
             <Table striped bordered hover>
                 <thead>
