@@ -4,7 +4,7 @@ import './App.scss';
 /* import Topbar from './components/Topbar/Topbar'; */
 import Sidebar from './components/Sidebar/Sidebar';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import Proveedores from './pages/proveedores/Proveedores';
@@ -23,6 +23,8 @@ function App() {
   return (
     <>
       <Router>
+        <Switch>
+        <Route path="/Login" exact={true} component={Login}/>
         <div className="flex">
           <Sidebar/>
           <div className="content">
@@ -35,10 +37,10 @@ function App() {
             <Route path="/salidas" exact={true} component={Salidas}/>
             <Route path="/inventario" exact={true} component={Inventario}/>
             <Route path="/usuarios" exact={true} component={Usuarios}/>
-            <Route path="/Login" exact={true} component={Login}/>
             <Route path="/documentacion" exact={true} component={Docs}/>
           </div>
         </div>
+        </Switch>
       </Router>
     </>
   );

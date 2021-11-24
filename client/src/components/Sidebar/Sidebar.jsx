@@ -58,7 +58,9 @@ const Sidebar = () => {
                 </li>
             </ul>
             <div className="sidebar__fondo">
-                <Button variant="outline-dark rounded py-2 px-2 w-100"><FaIcons.FaDoorOpen className="me-2"/> <p>Salir</p></Button>
+            <NavLink to="/login" exact={true} className="rounded py-2 px-2 w-100 d-inline-block ">
+                <Button variant="outline-dark rounded w-100"><FaIcons.FaDoorOpen className="me-2"/> <p>Salir</p></Button>
+                </NavLink>
             </div>
         </div>
         ):(
@@ -106,7 +108,9 @@ const Sidebar = () => {
                 </li>
             </ul>
             <div className="sidebarRes__fondo">
+            <NavLink to="/login" exact={true}>
                 <Button variant="outline-dark rounded py-2 px-2"><FaIcons.FaDoorOpen/> </Button>
+                </NavLink>
             </div>
         </div>
         )
